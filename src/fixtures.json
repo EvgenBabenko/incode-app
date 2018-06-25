@@ -1,0 +1,16 @@
+{
+    "generalInfo": {
+        "firstName": "Liana",
+        "lastName": "Crooks",
+        "email": "Gerry_Hackett77@gmail.com",
+        "dateOfBirth": "27.05.1900",
+        "gender": "male",
+        "address": "Dnipro",
+        "phone": "(895) 984-0132"
+    },
+    "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/kevinoh/128.jpg",
+    "technicalInfo": {
+        "skills": "some slills here",
+        "experience": "none"
+    }
+}
