@@ -3,9 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 import Header from './Header';
-import ProfileContainer from '../containers/ProfileContainer'
-import ProfileEditContainer from '../containers/ProfileEditContainer';
-
+import Routing from './Routing'
 
 const styles = {
     container: {
@@ -16,10 +14,7 @@ const styles = {
 const Layuot = ({ classes }) =>
     <React.Fragment>
         <Header />
-        <div className={classNames(classes.container)}>
-            <ProfileContainer />
-            <ProfileEditContainer />
-        </div>
+        <Routing />
     </React.Fragment>
 
 export default withStyles(styles)(Layuot);
