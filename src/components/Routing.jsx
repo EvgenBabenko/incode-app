@@ -3,7 +3,7 @@ import { Link, Route, Switch } from "react-router-dom"
 
 import ProfileContainer from '../containers/ProfileContainer'
 import ProfileEditContainer from '../containers/ProfileEditContainer'
-import TaskList from '../components/TaskList'
+import Dashboard from '../containers/Dashboard'
 
 export default () =>
     <React.Fragment>
@@ -15,7 +15,7 @@ export default () =>
             <Link to="/edit">Edit</Link>
         </nav>
         <Switch>
-            <Route exact path="/" component={TaskList} />
+            <Route exact path="/" component={Dashboard} />
             <Route path="/profile" component={ProfileContainer} />
             <Route path="/edit" component={ProfileEditContainer} />
         </Switch>

@@ -5,8 +5,8 @@ const addTask = (task) => ({
     task
 })
 
-const deleteTask = (id) => ({
-    type: dashboardTypes.DELETE_TASK,
+const editTask = (id) => ({
+    type: dashboardTypes.EDIT_TASK,
     id
 })
 
@@ -15,8 +15,14 @@ const completeTask = (id) => ({
     id
 })
 
+const deleteTask = (id) => ({
+    type: dashboardTypes.DELETE_TASK,
+    id
+})
+
 export default {
     addTask,
+    editTask,
+    completeTask,
     deleteTask,
-    completeTask
 }

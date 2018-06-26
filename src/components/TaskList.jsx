@@ -1,38 +1,36 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+
 
 import Task from './Task';
 
-const tasks = [
-    'Add profile page',
-    'Add routing',
-    'Refactoring code'
-]
+const styles = {
+    // root: {
+    //     width: '100%',
+    //     maxWidth: 360,
+    // },
+    taskList: {
+        display: 'flex',
+        flexWrap: 'wrap'
+    },
+    task: {
+        width: 'auto',
+    }
+};
 
-export default (props) => {
+const TaskList = (props) => {
+    const { classes, dashboard } = props
+    console.log(dashboard)
     return (
-        <React.Fragment>
-            {tasks.map((task, index) => <Task key={index} title={task} />)}
-        </React.Fragment>
+        <div className={classes.root}>
+            <List component="div" className={classes.taskList} >
+                {dashboard.map((task) =>
+                    <Task key={task.id} {...task} {...props} />
+                )}
+            </List>
+        </div>
     )
 }
 
-{/* <List dense={dense}>
-    {generate(
-        <ListItem>
-            <ListItemAvatar>
-                <Avatar>
-                    <FolderIcon />
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-                primary="Single-line item"
-                secondary={secondary ? 'Secondary text' : null}
-            />
-            <ListItemSecondaryAction>
-                <IconButton aria-label="Delete">
-                    <DeleteIcon />
-                </IconButton>
-            </ListItemSecondaryAction>
-        </ListItem>,
-    )}
-</List> */}
+export default withStyles(styles)(TaskList);
