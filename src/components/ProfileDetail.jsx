@@ -3,7 +3,6 @@ import classNames from 'classnames';
 
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 
 const styles = {
     row: {
@@ -24,25 +23,25 @@ const styles = {
     }
 };
 
-const renderProfileField = (field, classes) => 
-    Object.keys(field).map((key, index) =>
-        <p key={index} className={classNames(classes.line)}>{key}:{field[key]}</p>
-    )
-
 const ProfileDetail = (props) => {
-    const { classes, profile: { generalInfo, avatar, technicalInfo } } = props
+    const { classes, profile } = props
 
     return (
         <div className={classes.row}>
-            <Avatar
-                src={avatar}
-                className={classNames(classes.avatar, classes.bigAvatar)}
-            />
-            {renderProfileField(generalInfo, classes)}
-
-            {renderProfileField(technicalInfo, classes)}
-
-             <Button type="submit" variant="contained" color="primary" children="Edit" />
+            {Object.keys(profile).map((key, index) => {
+                return key === 'avatar'
+                    ? <Avatar
+                        key={index}
+                        src={profile[key]}
+                        className={classNames(classes.avatar, classes.bigAvatar)}
+                    />
+                    : <p
+                        key={index}
+                        className={classNames(classes.line)}
+                    >
+                        {key}: {profile[key]}
+                    </p>
+            })}
         </div>
     )
 }

@@ -1,48 +1,34 @@
-import React, { Component } from 'react';
-
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import reduceFormByAttr from '../../utils/reduceFormByAttr'
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { RadioGroup } from 'redux-form-material-ui'
 
-export default class extends Component {
-    state = {
-        firstName: '',
-        lastName: '',
-    }
+import InputTemplate from './InputTemplate'
 
-    handleChange = name => event => {
-        this.setState({ [name]: event.target.value})
-    }
-    
-    handleSubmit = (event) => {
-        event.preventDefault()
+const ProfileEdit = ({ handleSubmit, pristine, reset, submitting }) =>
+    <form onSubmit={handleSubmit}>
+        <InputTemplate name="firstName" label="First name" type="text" />
+        <InputTemplate name="lastName" label="Last name" type="text" />
+        <InputTemplate name="email" label="Email" type="text" />
+        <div>
+            <label>Gender</label>
+            <Field name="gender" aria-label="gender" label="Gender" component={RadioGroup}>
+                <FormControlLabel value="male" control={<Radio color="primary" />} label="Male" />
+                <FormControlLabel value="female" control={<Radio color="primary" />} label="Female" />
+            </Field>
+        </div>
+        <InputTemplate name="dateOfBirth" label="Date of birt" type="date" />
+        <InputTemplate name="address" label="Address" area={true} />
+        <InputTemplate name="skills" label="Skills" type="text" />
+        <InputTemplate name="experience" label="experience" type="text" />
+        <div>
+            <Button type="submit" disabled={pristine || submitting} variant="contained" color="primary" children="Submit" />
+            <Button type="button" disabled={pristine || submitting} onClick={reset} variant="contained" color="primary" children="Clear Values" />
+        </div>
+    </form>
 
-        this.props.addProfile(reduceFormByAttr('name', event.target))
-    }
-
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <TextField
-                    // id="firstName"
-                    label="First name"
-                    name="firstName"
-                    // className={classes.textField}
-                    value={this.state.firstName}
-                    onChange={this.handleChange('firstName')}
-                    margin="normal"
-                />
-                <TextField
-                    // id="firstName"
-                    label="Last name"
-                    name="lastName"
-                    // className={classes.textField}
-                    value={this.state.lastName}
-                    onChange={this.handleChange('lastName')}
-                    margin="normal"
-                />
-                <Button type="submit" variant="contained" color="primary" children="Add" />
-            </form>
-        )
-    }
-}
+export default reduxForm({
+    form: 'editFrofile', // a unique identifier for this form
+})(ProfileEdit);

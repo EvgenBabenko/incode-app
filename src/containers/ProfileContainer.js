@@ -20,7 +20,7 @@ class ProfileWrapper extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    profile: state.profile
+    profile: state.profile.profile
 })
 
 const mapDispatchToProps = dispatch => ({
