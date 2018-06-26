@@ -1,0 +1,9 @@
+const ADD_TASK = 'ADD_TASK'
+const DELETE_TASK = 'DELETE_TASK'
+const COMPLETE_TASK = 'COMPLETE_TASK'
+
+export default {
+    ADD_TASK,
+    DELETE_TASK,
+    COMPLETE_TASK
+}

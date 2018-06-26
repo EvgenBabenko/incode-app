@@ -7,6 +7,8 @@ import { profileActions } from '../modules/profile'
 
 class ProfileWrapper extends Component {
     componentDidMount() {
+        if (this.props.profile) return
+
         this.props.getProfile(fixtures)
     }
     
