@@ -1,12 +1,12 @@
 {
-    "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/kevinoh/128.jpg",
-    "firstName": "Liana",
-    "lastName": "Crooks",
-    "email": "Gerry_Hackett77@gmail.com",
-    "dateOfBirth": "2018-06-14",
-    "gender": "male",
-    "address": "Dnipro",
-    "phoneNumber": "(895) 984-0132",
-    "skills": "some skills here",
-    "experience": "none"
+  "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/kevinoh/128.jpg",
+  "firstName": "Liana",
+  "lastName": "Crooks",
+  "email": "Gerry_Hackett77@gmail.com",
+  "dateOfBirth": "2018-06-14",
+  "gender": "male",
+  "address": "Dnipro",
+  "phoneNumber": "(895) 984-0132",
+  "skills": "some skills here",
+  "experience": "none"
 }
