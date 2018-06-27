@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -28,9 +28,13 @@ const Header = (props) => {
       <AppBar position="static">
         <Toolbar>
           <Link to="/" className={classes.flex}>
-            <Typography variant="title" color="inherit" children="Home" />
+            <Typography variant="title" color="inherit">
+              Home
+            </Typography>
           </Link>
-          <Typography variant="title" color="inherit" className={classes.flex} children="InCode-App" />
+          <Typography variant="title" color="inherit" className={classes.flex}>
+            InCode-App
+          </Typography>
           <UserContainer />
         </Toolbar>
       </AppBar>
