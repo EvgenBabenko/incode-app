@@ -3,13 +3,16 @@ import { dashboardTypes } from './'
 const defaultState = {
     tasks: [{
         id: 1,
-        title: 'First task'
+        title: 'First task',
+        description: 'Lorem iae!'
     }, {
         id: 2,
-        title: 'Second task'
+        title: 'Second task',
+        description: 'Lorem ipsumlor sit a!'
     }, {
         id: 3,
-        title: 'Third task'
+        title: 'Third task',
+        description: 'Lorem ipsum dolor sit amet c!'
     }]
 }
 

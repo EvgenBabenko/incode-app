@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 
 import ProfileDetail from '../components/ProfileDetail'
 import fixtures  from '../fixtures.json'
-import { profileActions } from '../modules/profile'
+import { userActions } from '../modules/user'
 
 class ProfileWrapper extends Component {
     componentDidMount() {
         if (this.props.profile) return
 
-        this.props.getProfile(fixtures)
+        this.props.loadProfile(fixtures)
     }
     
     render() {
@@ -22,11 +22,11 @@ class ProfileWrapper extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    profile: state.profile.profile
+    profile: state.user.profile
 })
 
 const mapDispatchToProps = dispatch => ({
-    getProfile: profile => dispatch(profileActions.getProfile(profile))
+    loadProfile: profile => dispatch(userActions.loadProfile(profile))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileWrapper)

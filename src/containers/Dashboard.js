@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import TaskList from '../components/TaskList'
+import EmptyTaskList from '../components/EmptyTaskList'
 import { dashboardActions } from '../modules/dashboard'
 
 const TaskListWrapper = (props) => {
-    console.log(props)
+
     return (
-        <TaskList {...props} />
+        props.dashboard.length
+            ? <TaskList {...props} />
+            : <EmptyTaskList />
     )
 }
 

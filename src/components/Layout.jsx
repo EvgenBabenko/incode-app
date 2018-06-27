@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
 
 import Header from './Header';
 import Routing from './Routing'

@@ -1,8 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom"
 
 const styles = {
     row: {
@@ -38,10 +39,13 @@ const ProfileDetail = (props) => {
                     : <p
                         key={index}
                         className={classNames(classes.line)}
-                    >
-                        {key}: {profile[key]}
-                    </p>
+                        children={`${key}: ${profile[key]}`}
+                    />
             })}
+            <Link to="/edit">
+                <Button color="primary" variant="contained" children="Edit" />
+            </Link>
+            
         </div>
     )
 }

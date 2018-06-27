@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { RadioGroup } from 'redux-form-material-ui'
+import { Link } from "react-router-dom"
 
 import InputTemplate from './InputTemplate'
 
@@ -20,15 +21,18 @@ const ProfileEdit = ({ handleSubmit, pristine, reset, submitting }) =>
             </Field>
         </div>
         <InputTemplate name="dateOfBirth" label="Date of birt" type="date" />
-        <InputTemplate name="address" label="Address" area={true} />
+        <InputTemplate name="address" label="Address" area />
         <InputTemplate name="skills" label="Skills" type="text" />
         <InputTemplate name="experience" label="experience" type="text" />
         <div>
             <Button type="submit" disabled={pristine || submitting} variant="contained" color="primary" children="Submit" />
             <Button type="button" disabled={pristine || submitting} onClick={reset} variant="contained" color="primary" children="Clear Values" />
+            <Link to="/">
+                <Button type="button" variant="contained" color="primary" children="Cancel edit" />
+            </Link>
         </div>
     </form>
 
 export default reduxForm({
-    form: 'editFrofile', // a unique identifier for this form
+    form: 'editProfile', // a unique identifier for this form
 })(ProfileEdit);
