@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { profileActions } from '../modules/profile'
+import { userActions } from '../modules/user'
 
 import ProfileEdit from '../components/ProfileEdit'
 
@@ -18,11 +18,11 @@ class ProfileEditContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    initialValues: state.profile.profile,
+    initialValues: state.user.profile,
 })
 
 const mapDispatchToProps = dispatch => ({
-    editProfile: profile => dispatch(profileActions.editProfile(profile))
+    editProfile: profile => dispatch(userActions.editProfile(profile))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEditContainer)

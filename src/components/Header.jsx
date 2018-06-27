@@ -3,7 +3,12 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import { Link } from "react-router-dom"
+
+import UserContainer from '../containers/UserContainer'
 
 const styles = {
     root: {
@@ -18,19 +23,26 @@ const styles = {
     },
 };
 
-const Header = (props) => {
-    const { classes } = props;
+class Header extends React.Component {
+    render() {
+        const { classes } = this.props
+        
+        
 
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="title" color="inherit" className={classes.flex} children="INCODE-APP" />
-                    <Button color="inherit" children="Login" />
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
+        return (
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Link to="/" className={classes.flex}>
+                            <Typography variant="title" color="inherit" children="Home" />
+                        </Link>
+                        <Typography variant="title" color="inherit" className={classes.flex} children="InCode-App" />
+                        <UserContainer />
+                    </Toolbar>
+                </AppBar>
+            </div>
+        );
+    }
 }
 
 export default withStyles(styles)(Header);
