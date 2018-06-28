@@ -28,6 +28,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getTaskDetails: id => dispatch(dashboardActions.getTaskDetails(id)),
+  changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetailContainer);

@@ -1,50 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TaskList from '../components/TaskList';
-import EmptyDashboard from '../components/EmptyDashboard';
-import EmptyTaskList from '../components/EmptyTaskList';
-import { dashboardActions } from '../modules/dashboard';
+import CommentList from '../components/CommentList';
+import NoItems from '../components/NoItems';
+import { commentsActions } from '../modules/comments';
 import * as mock from '../fixtures';
 
-class Dashboard extends Component {
+class Comments extends Component {
   componentDidMount() {
-    const { taskList } = this.props;
+    const { commentList } = this.props;
 
-    console.log(taskList, !!taskList)
+    console.log(commentList, !!commentList)
 
-    if (taskList.length) return;
+    if (commentList.length) return;
 
-    this.getDashboard(mock.dashboard)
+    this.getComments()
   }
 
-  getDashboard = () => {
-    this.props.loadDashboard(mock.dashboard)
+  getComments = () => {
+    this.props.loadComments(mock.comments)
   }
 
   render() {
-    const { taskList, isLogin } = this.props;
+    const { commentList } = this.props;
 
     return(
-      !isLogin
-        ? <EmptyDashboard />
-        : taskList.length
-          ? <TaskList {...this.props} />
-          : <EmptyTaskList />
+      commentList.length
+          ? <CommentList {...this.props} />
+          : <NoItems text={'No comments'} />
     )
   }
 }
 
 const mapStateToProps = state => ({
-  taskList: state.dashboard.taskList,
-  isLogin: state.user.isLogin,
+  commentList: state.comments.commentList,
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteTask: id => dispatch(dashboardActions.deleteTask(id)),
-  loadDashboard: dashboard => dispatch(dashboardActions.loadDashboard(dashboard)),
-  changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
-  // getTaskDetails: id => dispatch(dashboardActions.getTaskDetails(id)),
+  loadComments: comments => dispatch(commentsActions.loadComments(comments)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Comments);

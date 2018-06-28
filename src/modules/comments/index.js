@@ -1,6 +1,6 @@
-import dashboardReducer from './reducers';
+import commentsReducer from './reducers';
 
-export { default as dashboardActions } from './actions';
-export { default as dashboardTypes } from './types';
+export { default as commentsActions } from './actions';
+export { default as commentsTypes } from './types';
 
-export default dashboardReducer;
+export default commentsReducer;

@@ -30,4 +30,10 @@ export const dashboard = [{
 }];
 
 // key - taskId
-export const comment = ['dsrfsdfs', 'asfasfdsgdsg'];
+export const comments = [{
+  id: 1,
+  content: 'Comment First task',
+}, {
+  id: 2,
+  content: 'Comment Second task',
+}];

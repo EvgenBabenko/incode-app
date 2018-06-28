@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
     if (taskList.length) return;
 
-    this.getDashboard(mock.dashboard)
+    this.getDashboard()
   }
 
   getDashboard = () => {

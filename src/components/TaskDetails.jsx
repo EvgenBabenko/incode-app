@@ -1,19 +1,22 @@
 import React from 'react';
 
-import CommentList from './CommentList';
+import Comments from '../containers/Comments';
+import Dropdown from './Dropdown';
 
 export default (props) => {
-  const { taskDetails: { title, description } } = props;
-  console.log(1, props);
+
+  const { taskDetails: { id, title, description, status }, changeTaskStatus } = props;
+  console.log('task detail', props);
 
   return (
     <React.Fragment>
       <h2>
-        Task details will be here (title, description, comments)
+        ID: {id}
       </h2>
       <p>{title}</p>
       <p>{description}</p>
-      <CommentList />
+      <Dropdown status={status} id={id} changeTaskStatus={changeTaskStatus} />
+      <Comments />
     </React.Fragment>
   );
 };
