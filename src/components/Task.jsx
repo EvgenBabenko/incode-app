@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import Button from '@material-ui/core/Button';
@@ -7,6 +9,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import IconButton from '@material-ui/core/IconButton';
+
 import Dropdown from './Dropdown';
 
 const styles = {
@@ -15,23 +20,38 @@ const styles = {
   },
 };
 
-const Task = ({ title, description, classes, id, deleteTask }) => {
+const Task = (props) => {
+  const { title, description, classes, id, deleteTask } = props;
 
   return (
     <ListItem button className={classes.task}>
       <Card className={classes.card}>
-        <CardHeader title={title} component="h2" />
+
+        <CardHeader
+          title={title}
+          component="h2"
+          action={
+            <Link to={`/task/${id}`} className="task-link">
+              <IconButton>
+                <MoreVertIcon />
+              </IconButton>
+            </Link>
+          }
+        />
+
         <CardContent>
           <Typography component="p">
             {description}
           </Typography>
         </CardContent>
+
         <CardActions>
           <Button onClick={() => deleteTask(id)} size="small">
             Delete task
           </Button>
-          <Dropdown />
+          <Dropdown {...props} />
         </CardActions>
+
       </Card>
     </ListItem>
   );

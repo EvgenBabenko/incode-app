@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
 
 const styles = {
   row: {
@@ -25,7 +26,7 @@ const styles = {
 };
 
 const ProfileDetail = (props) => {
-  const { classes, profile } = props
+  const { classes, profile, toggleEditProfile } = props
 
   return (
     <div className={classes.row}>
@@ -36,11 +37,17 @@ const ProfileDetail = (props) => {
             {`${key}: ${profile[key]}`}
           </p>
       })}
-      <Link to="/edit">
-        <Button color="primary" variant="contained">
+      
+      <div>
+        <Button onClick={toggleEditProfile} color="primary" variant="contained">
           Edit
         </Button>
-      </Link>
+        <Link to="/">
+          <Button onClick={toggleEditProfile} color="primary" variant="contained">
+            Close
+          </Button>
+        </Link>
+      </div>
 
     </div>
   );

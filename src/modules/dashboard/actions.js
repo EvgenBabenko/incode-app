@@ -1,8 +1,8 @@
 import { dashboardTypes } from '.';
 
-const addTask = task => ({
+const addTask = payload => ({
   type: dashboardTypes.ADD_TASK,
-  task,
+  payload,
 });
 
 const editTask = id => ({
@@ -20,9 +20,28 @@ const deleteTask = id => ({
   id,
 });
 
+const loadDashboard = payload => ({
+  type: dashboardTypes.LOAD_DASHBOARD,
+  payload,
+});
+
+const changeTaskStatus = (id, payload) => ({
+  type: dashboardTypes.CHANGE_TASK_STATUS,
+  id,
+  payload,
+});
+
+const getTaskDetails = id => ({
+  type: dashboardTypes.GET_TASK_DETAIL,
+  id,
+});
+
 export default {
   addTask,
   editTask,
   completeTask,
   deleteTask,
+  loadDashboard,
+  changeTaskStatus,
+  getTaskDetails,
 };

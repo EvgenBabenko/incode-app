@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import Header from './Header';
-import Routing from './Routing'
+import Routing from './Routing';
 
 const styles = {
   container: {
@@ -10,10 +11,11 @@ const styles = {
   },
 };
 
-const Layuot = ({ classes }) =>
+const Layuot = ({ classes }) => (
   <React.Fragment>
     <Header />
     <Routing />
   </React.Fragment>
+);
 
 export default withStyles(styles)(Layuot);

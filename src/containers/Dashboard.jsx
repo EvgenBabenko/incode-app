@@ -1,26 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import DoneIcon from '@material-ui/icons/Done';
+
 import TaskList from '../components/TaskList';
-import EmptyTaskList from '../components/EmptyTaskList';
+import NoItems from '../components/NoItems';
 import { dashboardActions } from '../modules/dashboard';
+import * as mock from '../fixtures';
 
-const TaskListWrapper = (props) => {
-  const { dashboard } = props;
+class Dashboard extends Component {
+  componentDidMount() {
+    const { taskList } = this.props;
 
-  return (
-    dashboard.length
-      ? <TaskList {...props} />
-      : <EmptyTaskList />
-  );
-};
+    console.log(taskList, !!taskList)
+
+    if (taskList.length) return;
+
+    this.getDashboard()
+  }
+
+  getDashboard = () => {
+    this.props.loadDashboard(mock.dashboard)
+  }
+
+  render() {
+    const { taskList, isLogin } = this.props;
+
+    return(
+      !isLogin
+        ? <NoItems text={'Please login for more'}/>
+        : taskList.length
+          ? <TaskList {...this.props} />
+          : <NoItems text={'No tasks for today'} children={<DoneIcon />}/>
+    )
+  }
+}
 
 const mapStateToProps = state => ({
-  dashboard: state.dashboard.tasks,
+  taskList: state.dashboard.taskList,
+  isLogin: state.user.isLogin,
 });
 
 const mapDispatchToProps = dispatch => ({
   deleteTask: id => dispatch(dashboardActions.deleteTask(id)),
+  loadDashboard: dashboard => dispatch(dashboardActions.loadDashboard(dashboard)),
+  changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskListWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

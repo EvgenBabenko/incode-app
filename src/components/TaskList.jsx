@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 
@@ -13,12 +14,12 @@ const styles = {
 };
 
 const TaskList = (props) => {
-  const { classes, dashboard } = props;
+  const { classes, taskList } = props;
 
   return (
     <div className={classes.root}>
       <List component="div" className={classes.taskList}>
-        {dashboard.map(task => <Task key={task.id} {...task} {...props} />)}
+        {taskList.map(task => <Task key={task.id} {...task} {...props} />)}
       </List>
     </div>
   );
