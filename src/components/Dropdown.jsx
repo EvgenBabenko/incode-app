@@ -1,16 +1,13 @@
 import React, { Component } from "react";
+
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 class Dropdown extends Component {
-  state = {
-    taskStatus: '',
-  };
-
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.props.changeTaskStatus(this.props.id, event.target.value)
   };
 
   render() {
@@ -19,17 +16,17 @@ class Dropdown extends Component {
         <FormControl>
           <InputLabel htmlFor="taskStatus-simple">Status</InputLabel>
           <Select
-            value={this.state.taskStatus}
+            value={this.props.status}
             onChange={this.handleChange}
             inputProps={{
               name: 'taskStatus',
               id: 'taskStatus-simple',
             }}
           >
-            <MenuItem value={10} children="To do" />
-            <MenuItem value={20} children="In progress" />
-            <MenuItem value={30} children="Rewiew" />
-            <MenuItem value={40} children="Done" />
+            <MenuItem value={'To do'} children='To do' />
+            <MenuItem value={'In progress'} children='In progress' />
+            <MenuItem value={'Rewiew'} children='Rewiew' />
+            <MenuItem value={'Done'} children='Done' />
           </Select>
         </FormControl>
       </form>

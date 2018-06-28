@@ -1,13 +1,13 @@
 import { userTypes } from '.';
 
-const loadProfile = profile => ({
+const loadProfile = payload => ({
   type: userTypes.LOAD_PROFILE,
-  profile,
+  payload,
 });
 
-const editProfile = profile => ({
+const editProfile = payload => ({
   type: userTypes.EDIT_PROFILE,
-  profile,
+  payload,
 });
 
 const userLogin = () => ({

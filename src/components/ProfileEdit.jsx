@@ -1,14 +1,15 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+import { RadioGroup } from 'redux-form-material-ui';
+
 import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { RadioGroup } from 'redux-form-material-ui';
-import { Link } from 'react-router-dom';
 
 import InputTemplate from './InputTemplate';
 
-const ProfileEdit = ({ handleSubmit, pristine, reset, submitting }) => (
+const ProfileEdit = ({ handleSubmit, pristine, reset, submitting, cancelEditProfile }) => (
   <form onSubmit={handleSubmit}>
     <InputTemplate name="firstName" label="First name" type="text" />
     <InputTemplate name="lastName" label="Last name" type="text" />
@@ -32,7 +33,7 @@ const ProfileEdit = ({ handleSubmit, pristine, reset, submitting }) => (
         Clear Values
       </Button>
       <Link to="/">
-        <Button type="button" variant="contained" color="primary">
+        <Button onClick={cancelEditProfile} type="button" variant="contained" color="primary">
           Cancel edit
         </Button>
       </Link>

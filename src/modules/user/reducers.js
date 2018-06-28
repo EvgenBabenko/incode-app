@@ -10,12 +10,12 @@ export default (state = defaultState, action) => {
     case userTypes.LOAD_PROFILE:
       return {
         ...state,
-        profile: action.profile,
+        profile: action.payload,
       };
     case userTypes.EDIT_PROFILE:
       return {
         ...state,
-        profile: action.profile,
+        profile: action.payload,
       };
     case userTypes.USER_LOGIN:
       return {

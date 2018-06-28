@@ -1,6 +1,6 @@
 import React from 'react';
+
 import { withStyles } from '@material-ui/core/styles';
-import DoneIcon from '@material-ui/icons/Done';
 
 const styles = {
   root: {
@@ -10,13 +10,13 @@ const styles = {
   },
 };
 
-const EmptyTaskList = ({ classes }) => (
+const NoItems = ({ text, children, classes }) => (
   <div className={classes.root}>
-    <DoneIcon />
     <p>
-      No tasks for today
+      {text}
     </p>
+    {children}
   </div>
 );
 
-export default withStyles(styles)(EmptyTaskList);
+export default withStyles(styles)(NoItems);

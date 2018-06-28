@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import DoneIcon from '@material-ui/icons/Done';
-
 import TaskList from '../components/TaskList';
-import NoItems from '../components/NoItems';
+import EmptyDashboard from '../components/EmptyDashboard';
+import EmptyTaskList from '../components/EmptyTaskList';
 import { dashboardActions } from '../modules/dashboard';
 import * as mock from '../fixtures';
 
@@ -28,10 +27,10 @@ class Dashboard extends Component {
 
     return(
       !isLogin
-        ? <NoItems text={'Please login for more'}/>
+        ? <EmptyDashboard />
         : taskList.length
           ? <TaskList {...this.props} />
-          : <NoItems text={'No tasks for today'} children={<DoneIcon />}/>
+          : <EmptyTaskList />
     )
   }
 }
@@ -45,6 +44,7 @@ const mapDispatchToProps = dispatch => ({
   deleteTask: id => dispatch(dashboardActions.deleteTask(id)),
   loadDashboard: dashboard => dispatch(dashboardActions.loadDashboard(dashboard)),
   changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
+  // getTaskDetails: id => dispatch(dashboardActions.getTaskDetails(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
