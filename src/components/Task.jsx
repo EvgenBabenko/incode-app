@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import T from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
@@ -30,13 +31,13 @@ const Task = (props) => {
         <CardHeader
           title={title}
           component="h2"
-          action={
+          action={(
             <Link to={`/task/${id}`} className="task-link">
               <IconButton>
                 <MoreVertIcon />
               </IconButton>
             </Link>
-          }
+          )}
         />
 
         <CardContent>
@@ -55,6 +56,19 @@ const Task = (props) => {
       </Card>
     </ListItem>
   );
+};
+
+Task.propTypes = {
+  title: T.string.isRequired,
+  id: T.number.isRequired,
+  deleteTask: T.func.isRequired,
+  description: T.string,
+  classes: T.objectOf(T.object)
+};
+
+Task.defaultProps = {
+  description: '',
+  classes: null
 };
 
 export default withStyles(styles)(Task);

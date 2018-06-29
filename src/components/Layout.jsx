@@ -11,7 +11,7 @@ const styles = {
   },
 };
 
-const Layuot = ({ classes }) => (
+const Layuot = () => (
   <React.Fragment>
     <Header />
     <Routing />

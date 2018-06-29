@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
+import T from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,7 +22,7 @@ class UserMenu extends Component {
     anchorEl: null,
   };
 
-  handleOpenMenu = event => {
+  handleOpenMenu = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -30,13 +31,15 @@ class UserMenu extends Component {
   };
 
   handleLogout = () => {
-    this.props.userLogout()
+    const { userLogout } = this.props;
 
-    this.handleCloseMenu()
+    userLogout();
+
+    this.handleCloseMenu();
   }
 
   render() {
-    const { classes } = this.props
+    const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -65,13 +68,26 @@ class UserMenu extends Component {
           onClose={this.handleCloseMenu}
         >
           <Link to="/profile" className={classes.link}>
-            <MenuItem onClick={this.handleCloseMenu}>Profile</MenuItem>
+            <MenuItem onClick={this.handleCloseMenu}>
+              Profile
+            </MenuItem>
           </Link>
-          <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+          <MenuItem onClick={this.handleLogout}>
+            Logout
+          </MenuItem>
         </Menu>
       </div>
-    )
+    );
   }
 }
+
+UserMenu.propTypes = {
+  userLogout: T.func.isRequired,
+  classes: T.objectOf(T.object)
+};
+
+UserMenu.defaultProps = {
+  classes: null
+};
 
 export default withStyles(styles)(UserMenu)

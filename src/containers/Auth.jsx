@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import T from 'prop-types';
 
 import { userActions } from '../modules/user';
 import User from '../components/User';
@@ -7,13 +8,15 @@ import * as mock from '../fixtures';
 
 class UserContainer extends Component {
   authorization = () => {
-    this.props.userLogin()
+    const { userLogin, loadProfile } = this.props;
 
-    this.props.loadProfile(mock.userProfile);
+    userLogin();
+
+    loadProfile(mock.userProfile);
   }
 
   render() {
-    return <User {...this.props} authorization={this.authorization}  />
+    return <User {...this.props} authorization={this.authorization} />;
   }
 }
 
@@ -26,5 +29,10 @@ const mapDispatchToProps = dispatch => ({
   userLogout: () => dispatch(userActions.userLogout()),
   loadProfile: profile => dispatch(userActions.loadProfile(profile)),
 });
+
+UserContainer.propTypes = {
+  userLogin: T.func.isRequired,
+  loadProfile: T.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserContainer);

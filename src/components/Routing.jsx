@@ -5,7 +5,7 @@ import Profile from '../containers/Profile';
 import Dashboard from '../containers/Dashboard';
 import TaskDetailsConainer from '../containers/TaskDetailsConainer';
 
-export default () => (
+const Routing = () => (
   <React.Fragment>
     <Switch>
       <Route exact path="/" component={Dashboard} />
@@ -14,3 +14,5 @@ export default () => (
     </Switch>
   </React.Fragment>
 );
+
+export default Routing;

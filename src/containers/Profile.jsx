@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import T from 'prop-types';
 
 import ProfileDetail from '../components/ProfileDetail';
 import ProfileEdit from '../components/ProfileEdit';
@@ -12,20 +13,22 @@ class ProfileWrapper extends Component {
   }
 
   toggleEditProfile = () => {
-    this.setState({ isEditProfile: !this.state.isEditProfile })
+    this.setState({ isEditProfile: !this.state.isEditProfile });
   }
 
   cancelEditProfile = () => {
-    this.setState({ isEditProfile: false })
+    this.setState({ isEditProfile: false });
   }
 
-  submit = values => {
+  submit = (values) => {
+    const { editProfile } = this.props;
+
     // print the form values to the console
-    console.log(values)
+    console.log(values);
 
-    this.props.editProfile(values);
+    editProfile(values);
 
-    this.cancelEditProfile()
+    this.cancelEditProfile();
   }
 
   render() {
@@ -48,5 +51,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   editProfile: profile => dispatch(userActions.editProfile(profile))
 });
+
+ProfileWrapper.propTypes = {
+  editProfile: T.func.isRequired,
+  profile: T.objectOf(T.string).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileWrapper);

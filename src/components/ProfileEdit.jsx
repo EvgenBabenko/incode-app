@@ -1,8 +1,9 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-import { RadioGroup } from 'redux-form-material-ui';
+import T from 'prop-types';
 
+import { RadioGroup } from 'redux-form-material-ui';
 import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -40,6 +41,14 @@ const ProfileEdit = ({ handleSubmit, pristine, reset, submitting, cancelEditProf
     </div>
   </form>
 );
+
+ProfileEdit.propTypes = {
+  handleSubmit: T.func.isRequired,
+  cancelEditProfile: T.func.isRequired,
+  pristine: T.func.isRequired,
+  submitting: T.func.isRequired,
+  reset: T.func.isRequired,
+};
 
 export default reduxForm({
   form: 'editProfile', // a unique identifier for this form

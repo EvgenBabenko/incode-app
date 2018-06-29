@@ -1,10 +1,11 @@
 import React from 'react';
+import T from 'prop-types';
 
 import List from '@material-ui/core/List';
 
 import Comment from './Comment';
 
-export default (props) => {
+const CommentList = (props) => {
   const { commentList } = props;
   console.log(1, props);
 
@@ -19,3 +20,9 @@ export default (props) => {
     </React.Fragment>
   );
 };
+
+CommentList.propTypes = {
+  commentList: T.arrayOf(T.object).isRequired
+};
+
+export default CommentList;

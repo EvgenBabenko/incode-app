@@ -27,7 +27,7 @@ export default (state = defaultState, action) => {
     case dashboardTypes.CHANGE_TASK_STATUS:
       return {
         ...state,
-        taskList: state.taskList.map(task => task.id === action.id ? {...task, status: action.payload} : task),
+        taskList: state.taskList.map(task => task.id === action.id ? { ...task, status: action.payload } : task),
       };
     case dashboardTypes.GET_TASK_DETAIL:
       return {

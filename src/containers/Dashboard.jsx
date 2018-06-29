@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import T from 'prop-types';
 
 import DoneIcon from '@material-ui/icons/Done';
 
@@ -16,23 +17,29 @@ class Dashboard extends Component {
 
     if (taskList.length) return;
 
-    this.getDashboard()
+    this.getDashboard();
   }
 
   getDashboard = () => {
-    this.props.loadDashboard(mock.dashboard)
+    const { loadDashboard } = this.props;
+
+    loadDashboard(mock.dashboard);
   }
 
   render() {
     const { taskList, isLogin } = this.props;
 
-    return(
+    return (
       !isLogin
-        ? <NoItems text={'Please login for more'}/>
+        ? <NoItems text="Please login for more" />
         : taskList.length
           ? <TaskList {...this.props} />
-          : <NoItems text={'No tasks for today'} children={<DoneIcon />}/>
-    )
+          : (
+            <NoItems text="No tasks for today">
+              {<DoneIcon />}
+            </NoItems>
+          )
+    );
   }
 }
 
@@ -46,5 +53,11 @@ const mapDispatchToProps = dispatch => ({
   loadDashboard: dashboard => dispatch(dashboardActions.loadDashboard(dashboard)),
   changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
 });
+
+Dashboard.propTypes = {
+  loadDashboard: T.func.isRequired,
+  taskList: T.arrayOf(T.object).isRequired,
+  isLogin: T.bool.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

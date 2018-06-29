@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -23,6 +24,15 @@ const TaskList = (props) => {
       </List>
     </div>
   );
+};
+
+TaskList.propTypes = {
+  taskList: T.arrayOf(T.object).isRequired,
+  classes: T.objectOf(T.object)
+};
+
+TaskList.defaultProps = {
+  classes: null
 };
 
 export default withStyles(styles)(TaskList);

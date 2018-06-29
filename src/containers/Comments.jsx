@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import T from 'prop-types';
 
 import CommentList from '../components/CommentList';
 import NoItems from '../components/NoItems';
@@ -10,25 +11,27 @@ class Comments extends Component {
   componentDidMount() {
     const { commentList } = this.props;
 
-    console.log(commentList, !!commentList)
+    console.log(commentList, !!commentList);
 
     if (commentList.length) return;
 
-    this.getComments()
+    this.getComments();
   }
 
   getComments = () => {
-    this.props.loadComments(mock.comments)
+    const { loadComments } = this.props;
+
+    loadComments(mock.comments);
   }
 
   render() {
     const { commentList } = this.props;
 
-    return(
+    return (
       commentList.length
-          ? <CommentList {...this.props} />
-          : <NoItems text={'No comments'} />
-    )
+        ? <CommentList {...this.props} />
+        : <NoItems text="No comments" />
+    );
   }
 }
 
@@ -39,5 +42,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loadComments: comments => dispatch(commentsActions.loadComments(comments)),
 });
+
+Comments.propTypes = {
+  loadComments: T.func.isRequired,
+  commentList: T.arrayOf(T.object).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);
