@@ -1,38 +1,54 @@
-import { dashboardTypes } from '.';
+import dashboardTypes from './types';
 
-const defaultState = {
+const initialState = {
   taskList: [],
-  taskDetails: null,
+  isEditTask: false,
 };
 
-export default (state = defaultState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case dashboardTypes.ADD_TASK:
-      return state.taskList.concat(action.payload);
-    case dashboardTypes.DELETE_TASK:
-      const index = state.taskList.findIndex(task => task.id === action.id);
-
-      return {
-        ...state,
-        taskList: [
-          ...state.taskList.slice(0, index),
-          ...state.taskList.slice(index + 1),
-        ]
-      };
     case dashboardTypes.LOAD_DASHBOARD:
       return {
         ...state,
         taskList: action.payload,
       };
+    case dashboardTypes.ADD_TASK:
+      return {
+        ...state,
+        taskList: state.taskList.concat(action.payload),
+      };
+    case dashboardTypes.UPDATE_TASK:
+      return {
+        ...state,
+        taskList: state.taskList.map(task => task.id === action.id
+          ? {
+            ...task,
+            title: action.payload.title,
+            description: action.payload.description
+          }
+          : task),
+      };
+    case dashboardTypes.DELETE_TASK:
+      return {
+        ...state,
+        taskList: state.taskList.filter(task => task.id !== action.id)
+      };
     case dashboardTypes.CHANGE_TASK_STATUS:
       return {
         ...state,
-        taskList: state.taskList.map(task => task.id === action.id ? { ...task, status: action.payload } : task),
+        taskList: state.taskList.map(task => task.id === action.id
+          ? { ...task, status: action.payload }
+          : task),
       };
-    case dashboardTypes.GET_TASK_DETAIL:
+    case dashboardTypes.OPEN_EDIT_TASK:
       return {
         ...state,
-        taskDetails: state.taskList.find(task => task.id === action.id),
+        isEditTask: true
+      };
+    case dashboardTypes.CLOSE_EDIT_TASK:
+      return {
+        ...state,
+        isEditTask: initialState.isEditTask,
       };
     default:
       return state;

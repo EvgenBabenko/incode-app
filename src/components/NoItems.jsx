@@ -23,13 +23,13 @@ const NoItems = ({ text, children, classes }) => (
 NoItems.propTypes = {
   text: T.string,
   children: T.element,
-  classes: T.objectOf(T.object)
+  classes: T.objectOf(T.string)
 };
 
 NoItems.defaultProps = {
   text: '',
   children: null,
-  classes: null
+  classes: ''
 };
 
 export default withStyles(styles)(NoItems);

@@ -10,12 +10,13 @@ class Dropdown extends Component {
   handleChange = (event) => {
     const { changeTaskStatus, id } = this.props;
 
+    console.log('changed', this.props.status);
     changeTaskStatus(id, event.target.value);
   };
 
   render() {
     const { status } = this.props;
-    console.log(1234, this.props);
+    console.log('dropdown', this.props);
     return (
       <form autoComplete="off">
         <FormControl>

@@ -37,10 +37,5 @@
       "pragma": "React",
       "version": "15.6.1"
     }
-  },
-  "globals": {
-    "window": true,
-    "document": false,
-    "console": true
   }
 }

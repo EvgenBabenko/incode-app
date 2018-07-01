@@ -2,11 +2,16 @@ import React from 'react';
 import T from 'prop-types';
 
 import Comments from '../containers/Comments';
-import Dropdown from './Dropdown';
+import StatusDropdown from './Forms/StatusDropdown';
 
-const TaskDetail = (props) => {
-  const { taskDetails: { id, title, description, status }, changeTaskStatus } = props;
-  console.log('task detail', props);
+const TaskDetails = (props) => {
+  const {
+    taskdetails: {
+      id, title, description, status
+    }
+  } = props;
+
+  console.log('taskDetail', props)
 
   return (
     <React.Fragment>
@@ -19,15 +24,15 @@ const TaskDetail = (props) => {
       <p>
         {description}
       </p>
-      <Dropdown status={status} id={id} changeTaskStatus={changeTaskStatus} />
-      <Comments />
+      <StatusDropdown id={id} status={status} {...props} />
+      <Comments taskID={id} />
     </React.Fragment>
   );
 };
 
-TaskDetail.propTypes = {
-  taskDetails: T.objectOf(T.object).isRequired,
+TaskDetails.propTypes = {
+  taskdetails: T.objectOf(T.object).isRequired,
   changeTaskStatus: T.func.isRequired,
 };
 
-export default TaskDetail;
+export default TaskDetails;

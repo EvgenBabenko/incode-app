@@ -9,27 +9,46 @@ import * as mock from '../fixtures';
 
 class Comments extends Component {
   componentDidMount() {
-    const { commentList } = this.props;
-
-    console.log(commentList, !!commentList);
-
-    if (commentList.length) return;
-
     this.getComments();
   }
 
-  getComments = () => {
-    const { loadComments } = this.props;
+  // componentDidUpdate(prevProps) {
+  //   // Typical usage (don't forget to compare props):
+  //   if (this.props.isLogin !== prevProps.isLogin) {
+  //     // this.fetchData(this.props.userID);
+  //     this.getComments();
+  //   }
+  // }
 
-    loadComments(mock.comments);
+  getComments = () => {
+    const { taskID, loadComments } = this.props;
+
+    const comments = Object.values(mock.comment).filter(comment => comment.taskID === taskID);
+
+    console.log('comments', comments);
+
+    loadComments(comments);
+  }
+
+  submitCallback = (values, commentID) => {
+    const { addComment, isEditComment, updateComment } = this.props;
+    // print the form values to the console
+    console.log('submit',values, isEditComment,commentID);
+
+    isEditComment ? updateComment(commentID, values) : addComment(values);
+
+
+    // closeEditProfile();
   }
 
   render() {
     const { commentList } = this.props;
 
+    console.log('comments', this.props);
+
     return (
       commentList.length
-        ? <CommentList {...this.props} />
+        ? <CommentList submitCallback={this.submitCallback} {...this.props} />
         : <NoItems text="No comments" />
     );
   }
@@ -37,10 +56,16 @@ class Comments extends Component {
 
 const mapStateToProps = state => ({
   commentList: state.comments.commentList,
+  userID: state.user.userID,
+  isEditComment: state.comments.isEditComment,
 });
 
 const mapDispatchToProps = dispatch => ({
   loadComments: comments => dispatch(commentsActions.loadComments(comments)),
+  addComment: comment => dispatch(commentsActions.addComment(comment)),
+  updateComment: (id, comment) => dispatch(commentsActions.updateComment(id, comment)),
+  openEditComment: () => dispatch(commentsActions.openEditComment()),
+  closeEditComment: () => dispatch(commentsActions.closeEditComment()),
 });
 
 Comments.propTypes = {

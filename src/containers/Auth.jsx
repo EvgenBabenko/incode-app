@@ -6,13 +6,15 @@ import { userActions } from '../modules/user';
 import User from '../components/User';
 import * as mock from '../fixtures';
 
-class UserContainer extends Component {
+class Auth extends Component {
   authorization = () => {
     const { userLogin, loadProfile } = this.props;
 
-    userLogin();
+    const userID = 2;
 
-    loadProfile(mock.userProfile);
+    userLogin(userID);
+
+    loadProfile(mock.user[userID]);
   }
 
   render() {
@@ -25,14 +27,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  userLogin: () => dispatch(userActions.userLogin()),
+  userLogin: id => dispatch(userActions.userLogin(id)),
   userLogout: () => dispatch(userActions.userLogout()),
   loadProfile: profile => dispatch(userActions.loadProfile(profile)),
 });
 
-UserContainer.propTypes = {
+Auth.propTypes = {
   userLogin: T.func.isRequired,
   loadProfile: T.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
