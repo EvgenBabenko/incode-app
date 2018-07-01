@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import T from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -23,14 +24,16 @@ const styles = {
 };
 
 const Header = (props) => {
-  const { classes } = props
+  const { classes } = props;
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <Link to="/">
-            <Button color="default" children="Home" />
+            <Button color="default">
+              Home
+            </Button>
           </Link>
           <Typography variant="title" color="inherit" className={classes.flex}>
             InCode-App
@@ -40,6 +43,14 @@ const Header = (props) => {
       </AppBar>
     </div>
   );
+};
+
+Header.propTypes = {
+  classes: T.objectOf(T.string)
+};
+
+Header.defaultProps = {
+  classes: ''
 };
 
 export default withStyles(styles)(Header);

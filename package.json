@@ -1,6 +1,6 @@
 {
   "name": "incode-app",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.2.3",
@@ -25,6 +25,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.5",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",

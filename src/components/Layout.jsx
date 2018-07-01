@@ -3,7 +3,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import Header from './Header';
-import Routing from './Routing';
+import Routes from './Routes';
 
 const styles = {
   container: {
@@ -11,10 +11,10 @@ const styles = {
   },
 };
 
-const Layuot = ({ classes }) => (
+const Layuot = () => (
   <React.Fragment>
     <Header />
-    <Routing />
+    <Routes />
   </React.Fragment>
 );
 

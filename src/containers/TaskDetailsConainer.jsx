@@ -1,34 +1,46 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import T from 'prop-types';
 
 import TaskDetails from '../components/TaskDetails';
-// import fixtures from '../fixtures.json';
 import { dashboardActions } from '../modules/dashboard';
+import * as mock from '../fixtures';
 
-const TaskDetailContainer = (props) => {
-  const { match: { params: { id } }, getTaskDetails, taskDetails } = props;
+const TaskDetailsContainer = (props) => {
+  function getTaskDetails(taskID) {
+    return mock.task[taskID];
+  }
 
-  console.log(id);
-
-  getTaskDetails(parseInt(id, 10));
+  const { match: { params: { id: taskID } }, taskList, userID } = props;
   
-  // const taskItem = props.taskList[props.activeTaskIndex]
+  const taskdetails = getTaskDetails(taskID);
+
+  console.log('TaskDetails', props, taskdetails);
 
   return (
-    taskDetails
-      ? <TaskDetails {...props} />
-      : <h1>Loading...</h1> 
-    
+    taskdetails
+      ? <TaskDetails taskdetails={taskdetails} {...props} />
+      : (
+        <h1>
+          Loading...
+        </h1>
+      )
   );
 };
 
 const mapStateToProps = state => ({
-  taskDetails: state.dashboard.taskDetails,
+  userID: state.user.userID,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getTaskDetails: id => dispatch(dashboardActions.getTaskDetails(id)),
   changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskDetailContainer);
+TaskDetailsContainer.propTypes = {
+  getTaskDetails: T.func.isRequired,
+  taskDetails: T.objectOf(T.object).isRequired,
+  taskList: T.objectOf(T.object).isRequired,
+  match: T.objectOf(T.object).isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskDetailsContainer);
