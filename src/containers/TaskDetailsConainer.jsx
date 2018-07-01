@@ -11,15 +11,15 @@ const TaskDetailsContainer = (props) => {
     return mock.task[taskID];
   }
 
-  const { match: { params: { id: taskID } }, taskList, userID } = props;
-  
-  const taskdetails = getTaskDetails(taskID);
+  const { match: { params: { id: taskID } } } = props;
 
-  console.log('TaskDetails', props, taskdetails);
+  const taskDetails = getTaskDetails(taskID);
+
+  console.log('TaskDetails', props, taskDetails);
 
   return (
-    taskdetails
-      ? <TaskDetails taskdetails={taskdetails} {...props} />
+    taskDetails
+      ? <TaskDetails taskDetails={taskDetails} {...props} />
       : (
         <h1>
           Loading...
@@ -28,19 +28,18 @@ const TaskDetailsContainer = (props) => {
   );
 };
 
-const mapStateToProps = state => ({
-  userID: state.user.userID,
-});
-
 const mapDispatchToProps = dispatch => ({
   changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
 });
 
 TaskDetailsContainer.propTypes = {
-  getTaskDetails: T.func.isRequired,
-  taskDetails: T.objectOf(T.object).isRequired,
-  taskList: T.objectOf(T.object).isRequired,
   match: T.objectOf(T.object).isRequired,
+  taskDetails: T.objectOf(T.string).isRequired,
+  getTaskDetails: T.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskDetailsContainer);
+TaskDetailsContainer.defaultProps = {
+  getTaskDetails: undefined,
+};
+
+export default connect(undefined, mapDispatchToProps)(TaskDetailsContainer);

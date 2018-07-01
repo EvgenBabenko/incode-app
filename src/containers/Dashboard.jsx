@@ -7,6 +7,7 @@ import TaskList from '../components/TaskList';
 
 import { dashboardActions } from '../modules/dashboard';
 import * as mock from '../fixtures';
+import RestAPI from '../utils/RestAPI';
 
 class Dashboard extends Component {
   // componentDidMount() {
@@ -14,16 +15,15 @@ class Dashboard extends Component {
 
   //   if (taskList.length) return;
 
-
-
   //   this.getDashboard(userID);
   // }
 
   componentDidUpdate(prevProps) {
+    const { isLogin, userID } = this.props;
     // Typical usage (don't forget to compare props):
-    if (this.props.isLogin !== prevProps.isLogin) {
-      // this.fetchData(this.props.userID);
-      this.getDashboard(this.props.userID);
+    if (isLogin !== prevProps.isLogin) {
+      // this.fetchData(userID);
+      this.getDashboard(userID);
     }
   }
 
@@ -32,35 +32,28 @@ class Dashboard extends Component {
 
     const dashboard = Object.values(mock.task).filter(task => task.createdForID === userID);
 
-    console.log('dashboard', dashboard)
+    console.log('dashboard', dashboard);
 
     loadDashboard(dashboard);
   }
 
   submitCallback = (values, taskID) => {
-    const { addTask, isEditTask, updateTask } = this.props;
+    const {
+      addTask, isEditTask, updateTask, userID
+    } = this.props;
     // print the form values to the console
-    console.log('submit',values, isEditTask, taskID);
+    console.log('submit', values, isEditTask, taskID);
 
-    isEditTask ? updateTask(taskID, values) : addTask(values);
-
-
-    // closeEditProfile();
+    if (isEditTask) {
+      updateTask(taskID, values);
+    } else {
+      addTask({ ...values, userID });
+    }
   }
 
-  // submit = (values) => {
-  //   const { addTask } = this.props;
-
-  //   // print the form values to the console
-  //   console.log(values);
-
-  //   addTask(values);
-
-  //   // this.cancelEditProfile();
-  // }
-
   render() {
-    const { taskList, isLogin } = this.props;
+    console.log('restAPI', RestAPI('/fixtures/users.json'));
+    const { isLogin } = this.props;
 
     return (
       !isLogin
@@ -90,7 +83,15 @@ const mapDispatchToProps = dispatch => ({
 Dashboard.propTypes = {
   loadDashboard: T.func.isRequired,
   taskList: T.arrayOf(T.object).isRequired,
-  isLogin: T.bool.isRequired
+  isLogin: T.bool.isRequired,
+  isEditTask: T.bool.isRequired,
+  addTask: T.func.isRequired,
+  updateTask: T.func.isRequired,
+  userID: T.number,
+};
+
+Dashboard.defaultProps = {
+  userID: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

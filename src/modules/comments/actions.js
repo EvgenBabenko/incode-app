@@ -1,8 +1,12 @@
 import commentsTypes from './types';
 
-const newComment = () => ({
+const newComment = payload => ({
   id: Date.now(),
-  date: Date.now(),
+  content: payload.content,
+  createdAt: Date.now(),
+  updatetAt: Date.now(),
+  createdByID: payload.userID,
+  taskID: payload.taskID,
 });
 
 const loadComments = payload => ({
@@ -12,7 +16,7 @@ const loadComments = payload => ({
 
 const addComment = payload => ({
   type: commentsTypes.ADD_COMMENT,
-  payload,
+  payload: newComment(payload),
 });
 
 const updateComment = (id, payload) => ({

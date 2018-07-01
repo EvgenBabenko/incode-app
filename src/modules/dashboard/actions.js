@@ -1,5 +1,14 @@
 import dashboardTypes from './types';
 
+const newTask = payload => ({
+  id: Date.now(),
+  title: payload.title,
+  description: payload.description,
+  status: 'To do',
+  createdAt: Date.now(),
+  createdForID: payload.userID,
+});
+
 const loadDashboard = payload => ({
   type: dashboardTypes.LOAD_DASHBOARD,
   payload,
@@ -7,7 +16,7 @@ const loadDashboard = payload => ({
 
 const addTask = payload => ({
   type: dashboardTypes.ADD_TASK,
-  payload,
+  payload: newTask(payload),
 });
 
 const updateTask = (id, payload) => ({

@@ -6,21 +6,18 @@ import StatusDropdown from './Forms/StatusDropdown';
 
 const TaskDetails = (props) => {
   const {
-    taskdetails: {
+    taskDetails: {
       id, title, description, status
     }
   } = props;
 
-  console.log('taskDetail', props)
+  console.log('taskDetails', props);
 
   return (
     <React.Fragment>
       <h2>
-        {`ID: ${id}`}
+        {`ID: ${id} - ${title.toUpperCase()}`}
       </h2>
-      <p>
-        {title}
-      </p>
       <p>
         {description}
       </p>
@@ -31,8 +28,7 @@ const TaskDetails = (props) => {
 };
 
 TaskDetails.propTypes = {
-  taskdetails: T.objectOf(T.object).isRequired,
-  changeTaskStatus: T.func.isRequired,
+  taskDetails: T.objectOf(T.string).isRequired
 };
 
 export default TaskDetails;

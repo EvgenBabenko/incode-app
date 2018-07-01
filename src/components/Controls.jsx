@@ -1,0 +1,44 @@
+import React from 'react';
+import T from 'prop-types';
+
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { withStyles } from '@material-ui/core/styles';
+
+import AddNew from './AddNew';
+
+const styles = {
+  root: {
+    display: 'flex'
+  },
+};
+
+const Conrols = (props) => {
+  const {
+    title, children, deleteItem, id, classes
+  } = props;
+
+  return (
+    <div className={classes.root}>
+      <AddNew title={title} edit {...props}>
+        {children}
+      </AddNew>
+      {/* <Button variant="fab" color="secondary" aria-label="edit" mini>
+        <EditIcon />
+      </Button> */}
+      <Button onClick={() => deleteItem(id)} variant="fab" aria-label="delete" mini>
+        <DeleteIcon />
+      </Button>
+    </div>
+  );
+};
+
+Conrols.propTypes = {
+  title: T.string.isRequired,
+  children: T.element.isRequired,
+  deleteItem: T.func.isRequired,
+  id: T.number.isRequired,
+  classes: T.objectOf(T.string).isRequired,
+};
+
+export default withStyles(styles)(Conrols);

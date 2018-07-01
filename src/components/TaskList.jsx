@@ -3,21 +3,19 @@ import T from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import DoneIcon from '@material-ui/icons/Done';
 
 import Task from './Task';
-// import AddTask from '../containers/AddTask';
 import NoItems from './NoItems';
 import AddNew from './AddNew';
 import TaskForm from './Forms/TaskForm';
 
 const styles = {
-  taskList: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'start',
-  },
+  // taskList: {
+  //   display: 'flex',
+  //   flexWrap: 'wrap',
+  //   alignItems: 'start',
+  // },
 };
 
 const TaskList = (props) => {
@@ -29,32 +27,35 @@ const TaskList = (props) => {
   }
 
   return (
-    taskList.length
-      ? (
-        <div className={classes.root}>
-          <AddNew title="New task">
-            <TaskForm onSubmit={submit} {...props} />
-          </AddNew>
-          <List component="div" className={classes.taskList}>
-            {taskList.map(task => <Task key={task.id} {...task} {...props} />)}
-          </List>
-        </div>
-      )
-      : (
-        <NoItems text="No tasks for today">
-          {<DoneIcon />}
-        </NoItems>
-      )
+    <React.Fragment>
+      <AddNew title="New task">
+        <TaskForm onSubmit={submit} {...props} />
+      </AddNew>
+
+      {taskList.length
+        ? (
+          <div className={classes.root}>
+
+            <List component="div" className={classes.taskList}>
+              {taskList.map(task => <Task key={task.id} {...task} {...props} />)}
+            </List>
+          </div>
+        )
+        : (
+          <NoItems text="No tasks for now">
+            {<DoneIcon />}
+          </NoItems>
+        )
+      }
+    </React.Fragment>
+
   );
 };
 
 TaskList.propTypes = {
   taskList: T.arrayOf(T.object).isRequired,
-  classes: T.objectOf(T.string)
-};
-
-TaskList.defaultProps = {
-  classes: ''
+  submitCallback: T.func.isRequired,
+  classes: T.objectOf(T.string).isRequired,
 };
 
 export default withStyles(styles)(TaskList);

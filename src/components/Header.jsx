@@ -46,11 +46,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  classes: T.objectOf(T.string)
-};
-
-Header.defaultProps = {
-  classes: ''
+  classes: T.objectOf(T.string).isRequired,
 };
 
 export default withStyles(styles)(Header);

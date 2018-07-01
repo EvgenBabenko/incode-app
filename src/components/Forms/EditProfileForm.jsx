@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import T from 'prop-types';
 
 import { RadioGroup } from 'redux-form-material-ui';
+
 import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -15,7 +16,7 @@ const EditProfileForm = (props) => {
     handleSubmit, pristine, reset, submitting, closeEditProfile
   } = props;
 
-  console.log('EditProfileForm' ,props)
+  console.log('EditProfileForm', props);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -53,8 +54,8 @@ const EditProfileForm = (props) => {
 EditProfileForm.propTypes = {
   handleSubmit: T.func.isRequired,
   closeEditProfile: T.func.isRequired,
-  pristine: T.func.isRequired,
-  submitting: T.func.isRequired,
+  pristine: T.bool.isRequired,
+  submitting: T.bool.isRequired,
   reset: T.func.isRequired,
 };
 
