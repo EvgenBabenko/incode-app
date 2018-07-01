@@ -83,11 +83,7 @@ class UserMenu extends Component {
 
 UserMenu.propTypes = {
   userLogout: T.func.isRequired,
-  classes: T.objectOf(T.string)
-};
-
-UserMenu.defaultProps = {
-  classes: ''
+  classes: T.objectOf(T.string).isRequired,
 };
 
 export default withStyles(styles)(UserMenu);

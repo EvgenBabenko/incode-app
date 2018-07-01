@@ -20,12 +20,13 @@ export default (state = initialState, action) => {
     case commentsTypes.UPDATE_COMMENT:
       return {
         ...state,
-        commentList: state.commentList.map(comment => comment.id === action.id
-          ? {
-            ...comment,
-            content: action.payload.content,
-          }
-          : comment),
+        commentList: state.commentList.map(comment => (
+          comment.id === action.id
+            ? {
+              ...comment,
+              content: action.payload.content,
+            }
+            : comment)),
       };
     case commentsTypes.DELETE_COMMENT:
       return {

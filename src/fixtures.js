@@ -1,41 +1,3 @@
-export const userProfile = {
-  avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/kevinoh/128.jpg',
-  firstName: 'Liana',
-  lastName: 'Crooks',
-  email: 'Gerry_Hackett77@gmail.com',
-  dateOfBirth: '2018-06-14',
-  gender: 'male',
-  address: 'Dnipro',
-  phoneNumber: '(895) 984-0132',
-  skills: 'some skills here',
-  experience: 'none',
-};
-
-export const comments = [{
-  id: 1,
-  content: 'Comment First task',
-}, {
-  id: 2,
-  content: 'Comment Second task',
-}];
-
-export const dashboard = [{
-  id: 1,
-  title: 'First task',
-  description: 'Lorem iae!',
-  status: '',
-}, {
-  id: 2,
-  title: 'Second task',
-  description: 'Lorem ipsumlor sit a!',
-  status: '',
-}, {
-  id: 3,
-  title: 'Third task',
-  description: 'Lorem ipsum dolor sit amet c!',
-  status: '',
-}];
-
 export const user = {
   1: {
     email: 'Gerry_Hackett77@gmail.com',
@@ -111,7 +73,7 @@ export const task = {
   6: {
     id: 6,
     title: '6 task',
-    description: 'Lorem ipsum dolor sit amet cregre ryre !',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis voluptates voluptatum minima animi porro necessitatibus totam nisi maiores cupiditate dignissimos nulla iusto, quam asperiores veniam qui, ipsam aliquam numquam ex!',
     status: 'In progress',
     createdAt: Date.now(),
     createdForID: 2
@@ -123,6 +85,7 @@ export const comment = {
     id: 1,
     content: 'ete 4t 43543 sfs ',
     createdAt: Date.now(),
+    updatetAt: Date.now(),
     createdByID: 1,
     taskID: 1
   },
@@ -130,6 +93,7 @@ export const comment = {
     id: 2,
     content: 'comment sfs ee tet',
     createdAt: Date.now(),
+    updatetAt: Date.now(),
     createdByID: 1,
     taskID: 1
   },
@@ -137,6 +101,7 @@ export const comment = {
     id: 3,
     content: 'erterte et et sfs ',
     createdAt: Date.now(),
+    updatetAt: Date.now(),
     createdByID: 1,
     taskID: 2
   },
@@ -144,6 +109,7 @@ export const comment = {
     id: 4,
     content: 'erterte et et sfs ',
     createdAt: Date.now(),
+    updatetAt: Date.now(),
     createdByID: 1,
     taskID: 4
   },
@@ -151,13 +117,15 @@ export const comment = {
     id: 5,
     content: 'erte ytr y trty rte et et sfs ',
     createdAt: Date.now(),
+    updatetAt: Date.now(),
     createdByID: 1,
     taskID: 4
   },
   6: {
     id: 6,
-    content: 'erte ytr y ewr trty rte et et sfs ',
+    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis voluptates voluptatum minima animi porro necessitatibus totam nisi maiores cupiditate dignissimos nulla iusto, quam asperiores veniam qui, ipsam aliquam numquam ex!',
     createdAt: Date.now(),
+    updatetAt: Date.now(),
     createdByID: 1,
     taskID: 4
   },
@@ -165,13 +133,15 @@ export const comment = {
     id: 7,
     content: 'erte ytr y ewr trty rte et et sfs ',
     createdAt: Date.now(),
+    updatetAt: Date.now(),
     createdByID: 2,
     taskID: 5
   },
   8: {
     id: 8,
-    content: 'erte ytr y ewr trty rte et et sfs ',
+    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis voluptates voluptatum minima animi porro necessitatibus totam nisi maiores cupiditate dignissimos nulla iusto, quam asperiores veniam qui, ipsam aliquam numquam ex!',
     createdAt: Date.now(),
+    updatetAt: Date.now(),
     createdByID: 2,
     taskID: 6
   },
@@ -179,6 +149,7 @@ export const comment = {
     id: 9,
     content: 'erte ytr y ewr trty rte et et sfs ',
     createdAt: Date.now(),
+    updatetAt: Date.now(),
     createdByID: 2,
     taskID: 6
   },

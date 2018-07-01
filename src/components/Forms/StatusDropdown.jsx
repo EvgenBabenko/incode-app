@@ -8,9 +8,9 @@ import Select from '@material-ui/core/Select';
 
 class Dropdown extends Component {
   handleChange = (event) => {
-    const { changeTaskStatus, id } = this.props;
+    const { changeTaskStatus, id, status } = this.props;
 
-    console.log('changed', this.props.status);
+    console.log('changed', status);
     changeTaskStatus(id, event.target.value);
   };
 
@@ -53,7 +53,7 @@ class Dropdown extends Component {
 Dropdown.propTypes = {
   changeTaskStatus: T.func.isRequired,
   id: T.number.isRequired,
-  status: T.string.isRequired
+  status: T.string.isRequired,
 };
 
 export default Dropdown;

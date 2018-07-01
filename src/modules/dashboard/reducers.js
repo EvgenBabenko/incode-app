@@ -20,13 +20,14 @@ export default (state = initialState, action) => {
     case dashboardTypes.UPDATE_TASK:
       return {
         ...state,
-        taskList: state.taskList.map(task => task.id === action.id
-          ? {
-            ...task,
-            title: action.payload.title,
-            description: action.payload.description
-          }
-          : task),
+        taskList: state.taskList.map(task => (
+          task.id === action.id
+            ? {
+              ...task,
+              title: action.payload.title,
+              description: action.payload.description
+            }
+            : task)),
       };
     case dashboardTypes.DELETE_TASK:
       return {
@@ -36,9 +37,10 @@ export default (state = initialState, action) => {
     case dashboardTypes.CHANGE_TASK_STATUS:
       return {
         ...state,
-        taskList: state.taskList.map(task => task.id === action.id
-          ? { ...task, status: action.payload }
-          : task),
+        taskList: state.taskList.map(task => (
+          task.id === action.id
+            ? { ...task, status: action.payload }
+            : task)),
       };
     case dashboardTypes.OPEN_EDIT_TASK:
       return {

@@ -13,13 +13,17 @@ const styles = {
 
 const NotFound = ({ classes }) => (
   <div className={classes.root}>
-    <h1>404</h1>
-    <div>Sorry, page was not found!</div>
+    <h1>
+      404
+    </h1>
+    <div>
+      Sorry, page was not found!
+    </div>
   </div>
 );
 
 NotFound.propTypes = {
-  classes: T.objectOf(T.string).isRequired
+  classes: T.objectOf(T.object).isRequired
 };
 
 export default withStyles(styles)(NotFound);

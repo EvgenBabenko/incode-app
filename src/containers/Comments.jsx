@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import T from 'prop-types';
 
 import CommentList from '../components/CommentList';
-import NoItems from '../components/NoItems';
 import { commentsActions } from '../modules/comments';
 import * as mock from '../fixtures';
 
@@ -31,26 +30,23 @@ class Comments extends Component {
   }
 
   submitCallback = (values, commentID) => {
-    const { addComment, isEditComment, updateComment } = this.props;
+    const {
+      addComment, isEditComment, updateComment, userID, taskID
+    } = this.props;
     // print the form values to the console
-    console.log('submit',values, isEditComment,commentID);
+    console.log('submit', values, isEditComment, commentID);
 
-    isEditComment ? updateComment(commentID, values) : addComment(values);
-
-
-    // closeEditProfile();
+    if (isEditComment) {
+      updateComment(commentID, values);
+    } else {
+      addComment({ ...values, userID, taskID });
+    }
   }
 
   render() {
-    const { commentList } = this.props;
-
     console.log('comments', this.props);
 
-    return (
-      commentList.length
-        ? <CommentList submitCallback={this.submitCallback} {...this.props} />
-        : <NoItems text="No comments" />
-    );
+    return <CommentList submitCallback={this.submitCallback} {...this.props} />;
   }
 }
 
@@ -64,13 +60,18 @@ const mapDispatchToProps = dispatch => ({
   loadComments: comments => dispatch(commentsActions.loadComments(comments)),
   addComment: comment => dispatch(commentsActions.addComment(comment)),
   updateComment: (id, comment) => dispatch(commentsActions.updateComment(id, comment)),
+  deleteComment: id => dispatch(commentsActions.deleteComment(id)),
   openEditComment: () => dispatch(commentsActions.openEditComment()),
   closeEditComment: () => dispatch(commentsActions.closeEditComment()),
 });
 
 Comments.propTypes = {
   loadComments: T.func.isRequired,
-  commentList: T.arrayOf(T.object).isRequired,
+  taskID: T.number.isRequired,
+  isEditComment: T.bool.isRequired,
+  addComment: T.func.isRequired,
+  updateComment: T.func.isRequired,
+  userID: T.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);

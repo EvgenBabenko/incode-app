@@ -27,8 +27,10 @@ const styles = {
 };
 
 const ProfileDetails = (props) => {
-  const { classes, profile, openEditProfile } = props;
-  console.log('ProfileDetails',props)
+  const {
+    classes, profile, openEditProfile, closeEditProfile
+  } = props;
+  console.log('ProfileDetails', props);
 
   return (
     <div className={classes.row}>
@@ -45,7 +47,7 @@ const ProfileDetails = (props) => {
           Edit
         </Button>
         <Link to="/">
-          <Button onClick={openEditProfile} color="primary" variant="contained">
+          <Button onClick={closeEditProfile} color="primary" variant="contained">
             Close
           </Button>
         </Link>
@@ -56,13 +58,10 @@ const ProfileDetails = (props) => {
 };
 
 ProfileDetails.propTypes = {
-  profile: T.objectOf(T.object).isRequired,
+  profile: T.objectOf(T.string).isRequired,
   openEditProfile: T.func.isRequired,
-  classes: T.objectOf(T.string)
-};
-
-ProfileDetails.defaultProps = {
-  classes: ''
+  closeEditProfile: T.func.isRequired,
+  classes: T.objectOf(T.string).isRequired,
 };
 
 export default withStyles(styles)(ProfileDetails);

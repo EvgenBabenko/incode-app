@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,35 +13,37 @@ class AddNew extends React.Component {
     open: false,
   };
 
-  handleClickOpen = () => {
+  handleOpenDialog = () => {
+    const { edit, openEdit } = this.props;
+
     this.setState({ open: true });
 
-    console.log('handleClickOpen', this.props)
+    console.log('handleOpenDialog', this.props);
 
-    if (this.props.edit) this.props.openEdit();
-    
+    if (edit) openEdit();
   };
 
-  handleClose = () => {
+  handleCloseDialog = () => {
+    const { edit, closeEdit } = this.props;
+
     this.setState({ open: false });
 
-    if (this.props.edit) this.props.closeEdit();
+    if (edit) closeEdit();
   };
 
   render() {
-    const {
-      children, title
-    } = this.props;
+    const { children, title } = this.props;
+    const { open } = this.state;
 
     return (
       <div>
-        <Button onClick={this.handleClickOpen} variant="fab" color="primary" aria-label="add" mini>
+        <Button onClick={this.handleOpenDialog} variant="fab" color="primary" aria-label="add" mini>
           <AddIcon />
         </Button>
 
         <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={open}
+          onClose={this.handleCloseDialog}
           aria-labelledby="form-dialog-title"
         >
 
@@ -53,7 +56,7 @@ class AddNew extends React.Component {
           </DialogContent>
 
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleCloseDialog} color="primary">
               Cancel
             </Button>
           </DialogActions>
@@ -63,5 +66,19 @@ class AddNew extends React.Component {
     );
   }
 }
+
+AddNew.propTypes = {
+  title: T.string.isRequired,
+  children: T.element.isRequired,
+  edit: T.bool,
+  openEdit: T.func,
+  closeEdit: T.func,
+};
+
+AddNew.defaultProps = {
+  edit: false,
+  openEdit: undefined,
+  closeEdit: undefined,
+};
 
 export default AddNew;

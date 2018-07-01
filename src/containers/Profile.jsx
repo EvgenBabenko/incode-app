@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import T from 'prop-types';
 
@@ -39,6 +39,7 @@ const mapDispatchToProps = dispatch => ({
 
 Profile.propTypes = {
   updateProfile: T.func.isRequired,
+  closeEditProfile: T.func.isRequired,
   profile: T.objectOf(T.string).isRequired,
   isEditProfile: T.bool.isRequired
 };

@@ -2,9 +2,9 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import T from 'prop-types';
 
-import Button from '@material-ui/core/Button';
-
 import { TextField } from 'redux-form-material-ui';
+
+import Button from '@material-ui/core/Button';
 
 const TaskForm = (props) => {
   const {
@@ -41,10 +41,8 @@ const TaskForm = (props) => {
 
 TaskForm.propTypes = {
   handleSubmit: T.func.isRequired,
-  closeEditProfile: T.func.isRequired,
-  pristine: T.func.isRequired,
-  submitting: T.func.isRequired,
-  reset: T.func.isRequired,
+  pristine: T.bool.isRequired,
+  submitting: T.bool.isRequired,
 };
 
 export default reduxForm({
