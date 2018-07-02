@@ -3,6 +3,7 @@ import dashboardTypes from './types';
 const initialState = {
   taskList: [],
   isEditTask: false,
+  isFetching: false,
 };
 
 export default (state = initialState, action) => {

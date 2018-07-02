@@ -44,6 +44,10 @@ const closeEditTask = () => ({
   type: dashboardTypes.CLOSE_EDIT_TASK
 });
 
+const requestTasks = () => ({
+  type: dashboardTypes.REQUEST_TASKS
+});
+
 export default {
   loadDashboard,
   addTask,
