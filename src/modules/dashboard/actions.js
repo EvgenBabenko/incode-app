@@ -1,4 +1,8 @@
+import axios from 'axios';
+
 import dashboardTypes from './types';
+
+axios.defaults.baseURL = 'http://localhost:3001/';
 
 const newTask = payload => ({
   id: Date.now(),
@@ -7,6 +11,16 @@ const newTask = payload => ({
   status: 'To do',
   createdAt: Date.now(),
   createdForID: payload.userID,
+});
+
+const requestTasks = payload => ({
+  type: dashboardTypes.REQUEST_TASKS,
+  payload
+});
+
+const reseiveTasks = payload => ({
+  type: dashboardTypes.RECEIVE_TASKS,
+  payload,
 });
 
 const loadDashboard = payload => ({
@@ -44,9 +58,12 @@ const closeEditTask = () => ({
   type: dashboardTypes.CLOSE_EDIT_TASK
 });
 
-const requestTasks = () => ({
-  type: dashboardTypes.REQUEST_TASKS
-});
+const fetchTasks = () => (dispatch) => {
+  dispatch(requestTasks());
+
+  axios.get('/')
+    .then(({ data }) => dispatch(reseiveTasks(data)));
+};
 
 export default {
   loadDashboard,
@@ -56,4 +73,5 @@ export default {
   changeTaskStatus,
   openEditTask,
   closeEditTask,
+  fetchTasks,
 };

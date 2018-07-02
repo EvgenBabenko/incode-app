@@ -10,13 +10,16 @@ import * as mock from '../fixtures';
 import RestAPI from '../utils/RestAPI';
 
 class Dashboard extends Component {
-  // componentDidMount() {
-  //   const { taskList, userID } = this.props;
+  componentDidMount() {
+    const { taskList, userID, fetchTasks } = this.props;
 
-  //   if (taskList.length) return;
+    fetchTasks();
 
-  //   this.getDashboard(userID);
-  // }
+    // if (taskList.length) return;
+    
+
+    // this.getDashboard(userID);
+  }
 
   componentDidUpdate(prevProps) {
     const { isLogin, userID } = this.props;
@@ -78,6 +81,7 @@ const mapDispatchToProps = dispatch => ({
   changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
   openEditTask: () => dispatch(dashboardActions.openEditTask()),
   closeEditTask: () => dispatch(dashboardActions.closeEditTask()),
+  fetchTasks: () => dispatch(dashboardActions.fetchTasks()),
 });
 
 Dashboard.propTypes = {

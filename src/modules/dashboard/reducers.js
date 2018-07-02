@@ -8,9 +8,15 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case dashboardTypes.LOAD_DASHBOARD:
+    case dashboardTypes.REQUEST_TASKS:
       return {
         ...state,
+        isFetching: true,
+      };
+    case dashboardTypes.RECEIVE_TASKS:
+      return {
+        ...state,
+        isFetching: false,
         taskList: action.payload,
       };
     case dashboardTypes.ADD_TASK:

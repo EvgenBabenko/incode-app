@@ -34,14 +34,14 @@ const styles = theme => ({
 
 const Task = (props) => {
   const {
-    title, description, classes, id, deleteTask, submitCallback, openEditTask, closeEditTask
+    title, description, classes, _id, deleteTask, submitCallback, openEditTask, closeEditTask
   } = props;
 
   console.log('task', props);
 
   function submit(values) {
     console.log(values);
-    submitCallback(values, id);
+    submitCallback(values, _id);
   }
 
   return (
@@ -50,7 +50,7 @@ const Task = (props) => {
       className={classes.task}
     >
 
-      <Link to={`/task/${id}`} className="task-link">
+      <Link to={`/task/${_id}`} className="task-link">
         <Card className={classes.card}>
           <CardHeader title={title} component="h2" />
 
