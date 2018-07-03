@@ -9,40 +9,31 @@ const newComment = payload => ({
   taskID: payload.taskID,
 });
 
-const loadComments = payload => ({
+export const loadComments = payload => ({
   type: commentsTypes.LOAD_COMMENTS,
   payload,
 });
 
-const addComment = payload => ({
+export const addComment = payload => ({
   type: commentsTypes.ADD_COMMENT,
   payload: newComment(payload),
 });
 
-const updateComment = (id, payload) => ({
+export const updateComment = (id, payload) => ({
   type: commentsTypes.UPDATE_COMMENT,
   id,
   payload,
 });
 
-const deleteComment = id => ({
+export const deleteComment = id => ({
   type: commentsTypes.DELETE_COMMENT,
   id,
 });
 
-const openEditComment = () => ({
+export const openEditComment = () => ({
   type: commentsTypes.OPEN_EDIT_COMMENT
 });
 
-const closeEditComment = () => ({
+export const closeEditComment = () => ({
   type: commentsTypes.CLOSE_EDIT_COMMENT
 });
-
-export default {
-  loadComments,
-  addComment,
-  updateComment,
-  deleteComment,
-  openEditComment,
-  closeEditComment,
-};

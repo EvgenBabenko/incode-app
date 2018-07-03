@@ -34,14 +34,12 @@ const styles = theme => ({
 
 const Task = (props) => {
   const {
-    title, description, classes, _id, deleteTask, submitCallback, openEditTask, closeEditTask
+    title, description, classes, _id, deleteTask, submitCallback, openEditTask, closeEditTask, updateTask
   } = props;
 
-  console.log('task', props);
-
   function submit(values) {
-    console.log(values);
-    submitCallback(values, _id);
+    updateTask(_id, values);
+    // submitCallback(values, _id);
   }
 
   return (

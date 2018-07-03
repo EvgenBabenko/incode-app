@@ -19,11 +19,11 @@ const styles = {
 };
 
 const TaskList = (props) => {
-  const { classes, taskList, submitCallback } = props;
+  const { classes, taskList, submitCallback, addTask} = props;
 
   function submit(values) {
-    console.log(values);
-    submitCallback(values);
+    // submitCallback(values);
+    addTask({ ...values });
   }
 
   return (
