@@ -1,36 +1,64 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import T from 'prop-types';
 
 import TaskDetails from '../components/TaskDetails';
-import { dashboardActions } from '../modules/dashboard';
+
+// import { dashboardActions } from '../modules/dashboard';
+import * as dashboardActionCreators from '../modules/dashboard/actions';
 import * as mock from '../fixtures';
 
-const TaskDetailsContainer = (props) => {
-  function getTaskDetails(taskID) {
-    return mock.task[taskID];
+class TaskDetailsContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    const { dispatch } = props;
+
+    this.boundActionCreators = bindActionCreators(dashboardActionCreators, dispatch);
+
+    // const { match: { params: { id: taskID } } } = props;
+
+    // this.taskDetails = mock.task[taskID];
+
+    // console.log('TaskDetails', props, this.taskDetails);
+
+    // this.getTaskDetails = this.getTaskDetails(taskID);
   }
 
-  const { match: { params: { id: taskID } } } = props;
+  componentDidMount() {
+    const { match: { params: { id } } } = this.props;
 
-  const taskDetails = getTaskDetails(taskID);
+    console.log('sdrtfesdrtf', id, this.props);
 
-  console.log('TaskDetails', props, taskDetails);
+    const { dispatch } = this.props;
 
-  return (
-    taskDetails
-      ? <TaskDetails taskDetails={taskDetails} {...props} />
-      : (
-        <h1>
-          Loading...
-        </h1>
-      )
-  );
-};
+    const fetchTask = dashboardActionCreators.fetchTask(id);
+    dispatch(fetchTask);
+  }
 
-const mapDispatchToProps = dispatch => ({
-  changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
+  render() {
+    const { taskDetails } = this.props;
+
+    return (
+      taskDetails
+        ? <TaskDetails {...this.props} {...this.boundActionCreators} />
+        : (
+          <h1>
+            Loading...
+          </h1>
+        )
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  taskDetails: state.dashboard.taskDetails,
 });
+
+// const mapDispatchToProps = dispatch => ({
+//   changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
+// });
 
 TaskDetailsContainer.propTypes = {
   match: T.objectOf(T.object).isRequired,
@@ -42,4 +70,4 @@ TaskDetailsContainer.defaultProps = {
   getTaskDetails: undefined,
 };
 
-export default connect(undefined, mapDispatchToProps)(TaskDetailsContainer);
+export default connect(mapStateToProps)(TaskDetailsContainer);

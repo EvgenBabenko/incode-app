@@ -7,7 +7,7 @@ import StatusDropdown from './Forms/StatusDropdown';
 const TaskDetails = (props) => {
   const {
     taskDetails: {
-      id, title, description, status
+      _id, title, description, status
     }
   } = props;
 
@@ -16,13 +16,13 @@ const TaskDetails = (props) => {
   return (
     <React.Fragment>
       <h2>
-        {`ID: ${id} - ${title.toUpperCase()}`}
+        {`ID: ${_id} - ${title.toUpperCase()}`}
       </h2>
       <p>
         {description}
       </p>
-      <StatusDropdown id={id} status={status} {...props} />
-      <Comments taskID={id} />
+      <StatusDropdown _id={_id} status={status} {...props} />
+      <Comments taskID={_id} />
     </React.Fragment>
   );
 };

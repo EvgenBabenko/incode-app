@@ -8,10 +8,12 @@ import Select from '@material-ui/core/Select';
 
 class Dropdown extends Component {
   handleChange = (event) => {
-    const { changeTaskStatus, id, status } = this.props;
+    const { changeTaskStatus, _id, status, updateTask } = this.props;
 
-    console.log('changed', status);
-    changeTaskStatus(id, event.target.value);
+    // console.log('changed', status);
+    // changeTaskStatus(id, event.target.value);
+
+    updateTask(_id, { status: event.target.value });
   };
 
   render() {

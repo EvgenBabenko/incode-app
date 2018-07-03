@@ -1,64 +1,91 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import T from 'prop-types';
 
 import NoItems from '../components/NoItems';
 import TaskList from '../components/TaskList';
 
-import { dashboardActions } from '../modules/dashboard';
+// import { dashboardActions } from '../modules/dashboard';
+import * as dashboardActionCreators from '../modules/dashboard/actions';
 import * as mock from '../fixtures';
-import RestAPI from '../utils/RestAPI';
 
 class Dashboard extends Component {
-  // componentDidMount() {
-  //   const { taskList, userID } = this.props;
+  constructor(props) {
+    super(props);
 
-  //   if (taskList.length) return;
+    const { dispatch } = props;
 
-  //   this.getDashboard(userID);
-  // }
+    this.boundActionCreators = bindActionCreators(dashboardActionCreators, dispatch);
 
-  componentDidUpdate(prevProps) {
-    const { isLogin, userID } = this.props;
-    // Typical usage (don't forget to compare props):
-    if (isLogin !== prevProps.isLogin) {
-      // this.fetchData(userID);
-      this.getDashboard(userID);
-    }
+    this.getDashboard = this.getDashboard.bind(this);
+    // this.submitCallback = this.submitCallback.bind(this);
   }
 
-  getDashboard = (userID) => {
+  componentDidMount() {
+    const { taskList, userID } = this.props;
+
+    const { dispatch } = this.props;
+
+    // fetchTasks();
+    const fetchTasks = dashboardActionCreators.fetchTasks();
+    dispatch(fetchTasks);
+
+    // if (taskList.length) return;
+
+
+    // this.getDashboard(userID);
+  }
+
+  // componentDidUpdate(prevProps) {
+  //   const { isLogin, userID } = this.props;
+  //   // Typical usage (don't forget to compare props):
+  //   if (isLogin !== prevProps.isLogin) {
+  //     // this.fetchData(userID);
+  //     this.getDashboard(userID);
+  //   }
+  // }
+
+  getDashboard(userID) {
     const { loadDashboard } = this.props;
 
     const dashboard = Object.values(mock.task).filter(task => task.createdForID === userID);
 
-    console.log('dashboard', dashboard);
-
     loadDashboard(dashboard);
   }
 
-  submitCallback = (values, taskID) => {
-    const {
-      addTask, isEditTask, updateTask, userID
-    } = this.props;
-    // print the form values to the console
-    console.log('submit', values, isEditTask, taskID);
+  // submitCallback(values, taskID) {
+  //   const {
+  //     isEditTask, userID
+  //   } = this.props;
 
-    if (isEditTask) {
-      updateTask(taskID, values);
-    } else {
-      addTask({ ...values, userID });
-    }
-  }
+  //   const { dispatch } = this.props;
+  //   // print the form values to the console
+
+  //   if (isEditTask) {
+  //     // updateTask(taskID, values);
+  //     const updateTask = dashboardActionCreators.updateTask(taskID, values);
+  //     dispatch(updateTask);
+  //   }
+  //   // } else {
+  //   //   // addTask({ ...values, userID });
+  //   //   const addTask = dashboardActionCreators.addTask({ ...values });
+  //   //   dispatch(addTask);
+  //   // }
+  // }
 
   render() {
-    console.log('restAPI', RestAPI('/fixtures/users.json'));
     const { isLogin } = this.props;
 
     return (
       !isLogin
         ? <NoItems text="Please login for more" />
-        : <TaskList {...this.props} submitCallback={this.submitCallback} />
+        : (
+          <TaskList
+            {...this.props}
+            {...this.boundActionCreators}
+          />
+        )
     );
   }
 }
@@ -70,23 +97,24 @@ const mapStateToProps = state => ({
   isEditTask: state.dashboard.isEditTask,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadDashboard: dashboard => dispatch(dashboardActions.loadDashboard(dashboard)),
-  addTask: task => dispatch(dashboardActions.addTask(task)),
-  updateTask: (id, task) => dispatch(dashboardActions.updateTask(id, task)),
-  deleteTask: id => dispatch(dashboardActions.deleteTask(id)),
-  changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
-  openEditTask: () => dispatch(dashboardActions.openEditTask()),
-  closeEditTask: () => dispatch(dashboardActions.closeEditTask()),
-});
+// const mapDispatchToProps = dispatch => ({
+//   loadDashboard: dashboard => dispatch(dashboardActions.loadDashboard(dashboard)),
+//   addTask: task => dispatch(dashboardActions.addTask(task)),
+//   updateTask: (id, task) => dispatch(dashboardActions.updateTask(id, task)),
+//   deleteTask: id => dispatch(dashboardActions.deleteTask(id)),
+//   changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
+//   openEditTask: () => dispatch(dashboardActions.openEditTask()),
+//   closeEditTask: () => dispatch(dashboardActions.closeEditTask()),
+//   fetchTasks: () => dispatch(dashboardActions.fetchTasks()),
+// });
 
 Dashboard.propTypes = {
-  loadDashboard: T.func.isRequired,
+  // loadDashboard: T.func.isRequired,
   taskList: T.arrayOf(T.object).isRequired,
   isLogin: T.bool.isRequired,
   isEditTask: T.bool.isRequired,
-  addTask: T.func.isRequired,
-  updateTask: T.func.isRequired,
+  // addTask: T.func.isRequired,
+  // updateTask: T.func.isRequired,
   userID: T.number,
 };
 
@@ -94,4 +122,4 @@ Dashboard.defaultProps = {
   userID: null,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

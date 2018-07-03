@@ -19,11 +19,11 @@ const styles = {
 };
 
 const TaskList = (props) => {
-  const { classes, taskList, submitCallback } = props;
+  const { classes, taskList, submitCallback, addTask} = props;
 
   function submit(values) {
-    console.log(values);
-    submitCallback(values);
+    // submitCallback(values);
+    addTask({ ...values });
   }
 
   return (
@@ -37,7 +37,7 @@ const TaskList = (props) => {
           <div className={classes.root}>
 
             <List component="div" className={classes.taskList}>
-              {taskList.map(task => <Task key={task.id} {...task} {...props} />)}
+              {taskList.map(task => <Task key={task._id} {...task} {...props} />)}
             </List>
           </div>
         )

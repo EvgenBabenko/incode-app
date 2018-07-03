@@ -4,7 +4,8 @@ const initialState = {
   userID: null,
   profile: null,
   isLogin: false,
-  isEditProfile: false
+  isEditProfile: false,
+  isFetching: false,
 };
 
 export default (state = initialState, action) => {

@@ -15,8 +15,12 @@ const styles = {
 
 const Conrols = (props) => {
   const {
-    title, children, deleteItem, id, classes
+    title, children, _id, classes, deleteTask
   } = props;
+
+  function handleDeleteItem() {
+    deleteTask(_id);
+  }
 
   return (
     <div className={classes.root}>
@@ -26,7 +30,7 @@ const Conrols = (props) => {
       {/* <Button variant="fab" color="secondary" aria-label="edit" mini>
         <EditIcon />
       </Button> */}
-      <Button onClick={() => deleteItem(id)} variant="fab" aria-label="delete" mini>
+      <Button onClick={handleDeleteItem} variant="fab" aria-label="delete" mini>
         <DeleteIcon />
       </Button>
     </div>
@@ -36,7 +40,7 @@ const Conrols = (props) => {
 Conrols.propTypes = {
   title: T.string.isRequired,
   children: T.element.isRequired,
-  deleteItem: T.func.isRequired,
+  // deleteItem: T.func.isRequired,
   id: T.number.isRequired,
   classes: T.objectOf(T.string).isRequired,
 };
