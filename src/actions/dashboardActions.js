@@ -1,7 +1,7 @@
 import axios from 'axios';
-import config from '../../config';
 
-import dashboardTypes from './types';
+import config from '../config';
+import dashboardTypes from '../constants/dashboardTypes';
 
 axios.defaults.baseURL = config.AXIOS_URL;
 
@@ -22,14 +22,14 @@ export const reseiveTask = payload => ({
 export const fetchTasks = () => (dispatch) => {
   dispatch(requestTasks());
 
-  axios.get('/')
+  axios.get('/dashboard')
     .then(({ data }) => dispatch(reseiveTasks(data)));
 };
 
 export const fetchTask = id => (dispatch) => {
   dispatch(requestTasks());
 
-  axios.get(`/${id}`)
+  axios.get(`/dashboard/${id}`)
     .then(({ data }) => dispatch(reseiveTask(data)));
 };
 
@@ -39,7 +39,7 @@ export const addItem = payload => ({
 });
 
 export const addTask = payload => (dispatch) => {
-  axios.post('/', { ...payload })
+  axios.post('/dashboard', { ...payload })
     .then(() => dispatch(fetchTasks()));
 };
 
@@ -50,7 +50,7 @@ export const addTask = payload => (dispatch) => {
 // });
 
 export const updateTask = (id, payload) => (dispatch) => {
-  axios.put(`/${id}`, { ...payload })
+  axios.put(`/dashboard/${id}`, { ...payload })
     .then(() => dispatch(fetchTasks()))
     .then(() => dispatch(fetchTask()));
 };
@@ -61,7 +61,7 @@ export const updateTask = (id, payload) => (dispatch) => {
 // });
 
 export const deleteTask = id => (dispatch) => {
-  axios.delete(`/${id}`)
+  axios.delete(`/dashboard/${id}`)
     .then(() => dispatch(fetchTasks()));
 };
 

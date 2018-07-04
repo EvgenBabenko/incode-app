@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import store from './modules/store';
+import store from './helpers/store';
 import Layout from './components/Layout';
 
 const App = () => (

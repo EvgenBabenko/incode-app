@@ -30,7 +30,7 @@ const Header = (props) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="/">
+          <Link to="/dashboard">
             <Button color="default">
               Home
             </Button>

@@ -7,7 +7,7 @@ import ProfileDetails from '../components/ProfileDetails';
 import EditProfileForm from '../components/Forms/EditProfileForm';
 
 // import { userActions } from '../modules/user';
-import * as userActionCreators from '../modules/user/actions';
+import * as userActionCreators from '../actions/userActions';
 
 class Profile extends Component {
   constructor(props) {

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
-import user from './user';
-import dashboard from './dashboard';
-import comments from './comments';
+import user from './userReducers';
+import dashboard from './dashboardReducers';
+import comments from './commentsReducers';
 
 export default combineReducers({
   user,

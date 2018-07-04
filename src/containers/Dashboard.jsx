@@ -7,7 +7,7 @@ import NoItems from '../components/NoItems';
 import TaskList from '../components/TaskList';
 
 // import { dashboardActions } from '../modules/dashboard';
-import * as dashboardActionCreators from '../modules/dashboard/actions';
+import * as dashboardActionCreators from '../actions/dashboardActions';
 import * as mock from '../fixtures';
 
 class Dashboard extends Component {
@@ -23,6 +23,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
+    console.log(231564)
     const { taskList, userID } = this.props;
 
     const { dispatch } = this.props;

@@ -1,4 +1,4 @@
-import dashboardTypes from './types';
+import dashboardTypes from '../constants/dashboardTypes';
 
 const initialState = {
   taskList: [],

@@ -1,4 +1,4 @@
-import commentsTypes from './types';
+import commentsTypes from '../constants/commentsTypes';
 
 const newComment = payload => ({
   id: Date.now(),

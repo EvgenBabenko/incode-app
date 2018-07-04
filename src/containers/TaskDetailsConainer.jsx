@@ -6,7 +6,7 @@ import T from 'prop-types';
 import TaskDetails from '../components/TaskDetails';
 
 // import { dashboardActions } from '../modules/dashboard';
-import * as dashboardActionCreators from '../modules/dashboard/actions';
+import * as dashboardActionCreators from '../actions/dashboardActions';
 import * as mock from '../fixtures';
 
 class TaskDetailsContainer extends Component {

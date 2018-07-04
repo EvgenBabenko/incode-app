@@ -5,7 +5,7 @@ import T from 'prop-types';
 
 import User from '../components/User';
 
-import * as userActionCreators from '../modules/user/actions';
+import * as userActionCreators from '../actions/userActions';
 import * as mock from '../fixtures';
 
 class Auth extends Component {

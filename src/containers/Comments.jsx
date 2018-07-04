@@ -6,7 +6,7 @@ import T from 'prop-types';
 import CommentList from '../components/CommentList';
 
 // import { commentsActions } from '../modules/comments';
-import * as commentActionCreators from '../modules/comments/actions';
+import * as commentActionCreators from '../actions/commentsActions';
 import * as mock from '../fixtures';
 
 class Comments extends Component {
