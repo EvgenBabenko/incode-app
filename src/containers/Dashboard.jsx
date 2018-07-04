@@ -6,9 +6,7 @@ import T from 'prop-types';
 import NoItems from '../components/NoItems';
 import TaskList from '../components/TaskList';
 
-// import { dashboardActions } from '../modules/dashboard';
 import * as dashboardActionCreators from '../actions/dashboardActions';
-import * as mock from '../fixtures';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -17,25 +15,12 @@ class Dashboard extends Component {
     const { dispatch } = props;
 
     this.boundActionCreators = bindActionCreators(dashboardActionCreators, dispatch);
-
-    this.getDashboard = this.getDashboard.bind(this);
-    // this.submitCallback = this.submitCallback.bind(this);
   }
 
   componentDidMount() {
-    console.log(231564)
-    const { taskList, userID } = this.props;
-
     const { dispatch } = this.props;
 
-    // fetchTasks();
-    const fetchTasks = dashboardActionCreators.fetchTasks();
-    dispatch(fetchTasks);
-
-    // if (taskList.length) return;
-
-
-    // this.getDashboard(userID);
+    dispatch(dashboardActionCreators.fetchTasks());
   }
 
   // componentDidUpdate(prevProps) {
@@ -45,34 +30,6 @@ class Dashboard extends Component {
   //     // this.fetchData(userID);
   //     this.getDashboard(userID);
   //   }
-  // }
-
-  getDashboard(userID) {
-    const { loadDashboard } = this.props;
-
-    const dashboard = Object.values(mock.task).filter(task => task.createdForID === userID);
-
-    loadDashboard(dashboard);
-  }
-
-  // submitCallback(values, taskID) {
-  //   const {
-  //     isEditTask, userID
-  //   } = this.props;
-
-  //   const { dispatch } = this.props;
-  //   // print the form values to the console
-
-  //   if (isEditTask) {
-  //     // updateTask(taskID, values);
-  //     const updateTask = dashboardActionCreators.updateTask(taskID, values);
-  //     dispatch(updateTask);
-  //   }
-  //   // } else {
-  //   //   // addTask({ ...values, userID });
-  //   //   const addTask = dashboardActionCreators.addTask({ ...values });
-  //   //   dispatch(addTask);
-  //   // }
   // }
 
   render() {
@@ -110,12 +67,9 @@ const mapStateToProps = state => ({
 // });
 
 Dashboard.propTypes = {
-  // loadDashboard: T.func.isRequired,
   taskList: T.arrayOf(T.object).isRequired,
   isLogin: T.bool.isRequired,
   isEditTask: T.bool.isRequired,
-  // addTask: T.func.isRequired,
-  // updateTask: T.func.isRequired,
   userID: T.number,
 };
 

@@ -3,7 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import user from './userReducers';
 import dashboard from './dashboardReducers';
-import comments from './commentsReducers';
+import comments from './commentReducers';
 
 export default combineReducers({
   user,

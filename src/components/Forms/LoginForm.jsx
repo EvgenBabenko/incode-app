@@ -6,7 +6,7 @@ import { TextField } from 'redux-form-material-ui';
 
 import Button from '@material-ui/core/Button';
 
-const Login = (props) => {
+const LoginForm = (props) => {
   const {
     handleSubmit, pristine, submitting,
   } = props;
@@ -27,7 +27,7 @@ const Login = (props) => {
         autoFocus
         name="password"
         component={TextField}
-        type="text"
+        type="password"
         label="Password"
         margin="dense"
         InputLabelProps={{ shrink: true }}
@@ -36,11 +36,14 @@ const Login = (props) => {
       <Button color="primary" type="submit" disabled={pristine || submitting}>
         Signin
       </Button>
+      <Button type="button" variant="contained" color="primary">
+        Cancel
+      </Button>
     </form>
   );
 };
 
-Login.propTypes = {
+LoginForm.propTypes = {
   handleSubmit: T.func.isRequired,
   pristine: T.bool.isRequired,
   submitting: T.bool.isRequired,
@@ -48,4 +51,4 @@ Login.propTypes = {
 
 export default reduxForm({
   form: 'login', // a unique identifier for this form
-})(Login);
+})(LoginForm);

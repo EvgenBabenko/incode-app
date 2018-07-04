@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from './Header';
 import Routes from './Routes';
-import Fake from '../containers/Fake';
+// import Fake from '../containers/Fake';
 
 const Layuot = () => (
   <React.Fragment>

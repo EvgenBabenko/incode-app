@@ -22,14 +22,14 @@ export const reseiveTask = payload => ({
 export const fetchTasks = () => (dispatch) => {
   dispatch(requestTasks());
 
-  axios.get('/dashboard')
+  axios.get('/')
     .then(({ data }) => dispatch(reseiveTasks(data)));
 };
 
 export const fetchTask = id => (dispatch) => {
   dispatch(requestTasks());
 
-  axios.get(`/dashboard/${id}`)
+  axios.get(`/${id}`)
     .then(({ data }) => dispatch(reseiveTask(data)));
 };
 
@@ -39,7 +39,7 @@ export const addItem = payload => ({
 });
 
 export const addTask = payload => (dispatch) => {
-  axios.post('/dashboard', { ...payload })
+  axios.post('/', { ...payload })
     .then(() => dispatch(fetchTasks()));
 };
 
@@ -50,7 +50,7 @@ export const addTask = payload => (dispatch) => {
 // });
 
 export const updateTask = (id, payload) => (dispatch) => {
-  axios.put(`/dashboard/${id}`, { ...payload })
+  axios.put(`/${id}`, { ...payload })
     .then(() => dispatch(fetchTasks()))
     .then(() => dispatch(fetchTask()));
 };
@@ -61,7 +61,7 @@ export const updateTask = (id, payload) => (dispatch) => {
 // });
 
 export const deleteTask = id => (dispatch) => {
-  axios.delete(`/dashboard/${id}`)
+  axios.delete(`/${id}`)
     .then(() => dispatch(fetchTasks()));
 };
 

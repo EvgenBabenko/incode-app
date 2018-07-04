@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLogin: true,
-        userID: action.id
+        userID: action.user
       };
     case userTypes.USER_LOGOUT:
       return {

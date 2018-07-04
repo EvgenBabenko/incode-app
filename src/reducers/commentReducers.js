@@ -1,4 +1,4 @@
-import commentsTypes  from '../constants/commentsTypes';
+import commentTypes from '../constants/commentTypes';
 
 const initialState = {
   commentList: [],
@@ -8,17 +8,17 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case commentsTypes.LOAD_COMMENTS:
+    case commentTypes.LOAD_COMMENTS:
       return {
         ...state,
         commentList: action.payload,
       };
-    case commentsTypes.ADD_COMMENT:
+    case commentTypes.ADD_COMMENT:
       return {
         ...state,
         commentList: state.commentList.concat(action.payload),
       };
-    case commentsTypes.UPDATE_COMMENT:
+    case commentTypes.UPDATE_COMMENT:
       return {
         ...state,
         commentList: state.commentList.map(comment => (
@@ -29,17 +29,17 @@ export default (state = initialState, action) => {
             }
             : comment)),
       };
-    case commentsTypes.DELETE_COMMENT:
+    case commentTypes.DELETE_COMMENT:
       return {
         ...state,
         commentList: state.commentList.filter(comment => comment.id !== action.id)
       };
-    case commentsTypes.OPEN_EDIT_COMMENT:
+    case commentTypes.OPEN_EDIT_COMMENT:
       return {
         ...state,
         isEditComment: true
       };
-    case commentsTypes.CLOSE_EDIT_COMMENT:
+    case commentTypes.CLOSE_EDIT_COMMENT:
       return {
         ...state,
         isEditComment: initialState.isEditComment,

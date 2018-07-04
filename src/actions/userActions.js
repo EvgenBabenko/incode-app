@@ -1,12 +1,6 @@
-import axios from 'axios';
-
 import userTypes from '../constants/userTypes';
+import userService from '../services';
 import history from '../helpers/history';
-
-
-import config from '../config';
-
-axios.defaults.baseURL = config.AXIOS_URL;
 
 export const loadProfile = payload => ({
   type: userTypes.LOAD_PROFILE,
@@ -18,9 +12,9 @@ export const updateProfile = payload => ({
   payload,
 });
 
-export const userLogin = id => ({
+export const userLogin = user => ({
   type: userTypes.USER_LOGIN,
-  id
+  user
 });
 
 export const userLogout = () => ({
@@ -42,21 +36,13 @@ export const closeEditProfile = () => ({
 
 
 
-export const signin = payload => (dispatch) => {
+export const register = payload => (dispatch) => {
   dispatch(userLogin());
 
-  axios.post('/auth/register', { ...payload })
+  userService.register(payload)
     .then((user) => {
-      console.log(user);
-      // login successful if there's a jwt token in the response
-      if (user.data.token) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('user', JSON.stringify(user.data));
-      }
-
-      history.push('/dashboard');
-
-      return user;
+      dispatch(userLogin(user));
+      history.push('/');
     });
 };
 

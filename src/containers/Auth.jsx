@@ -43,15 +43,9 @@ class Auth extends Component {
 
     const userID = 2;
 
-    const userLogin = userActionCreators.userLogin(userID);
-    dispatch(userLogin);
+    dispatch(userActionCreators.userLogin(userID));
 
-    // userLogin(userID);
-
-    const loadProfile = userActionCreators.loadProfile(mock.user[userID]);
-    dispatch(loadProfile);
-
-    // loadProfile(mock.user[userID]);
+    dispatch(userActionCreators.loadProfile(mock.user[userID]));
   }
 
   render() {

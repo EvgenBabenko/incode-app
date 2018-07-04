@@ -6,7 +6,6 @@ import T from 'prop-types';
 import ProfileDetails from '../components/ProfileDetails';
 import EditProfileForm from '../components/Forms/EditProfileForm';
 
-// import { userActions } from '../modules/user';
 import * as userActionCreators from '../actions/userActions';
 
 class Profile extends Component {
@@ -26,12 +25,10 @@ class Profile extends Component {
     console.log(values);
 
     // updateProfile(values);
-    const updateProfile = userActionCreators.updateProfile(values);
-    dispatch(updateProfile);
+    dispatch(userActionCreators.updateProfile(values));
 
     // closeEditProfile();
-    const closeEditProfile = userActionCreators.closeEditProfile();
-    dispatch(closeEditProfile);
+    dispatch(userActionCreators.closeEditProfile());
   }
 
   render() {
@@ -58,8 +55,6 @@ const mapStateToProps = state => ({
 // });
 
 Profile.propTypes = {
-  // updateProfile: T.func.isRequired,
-  // closeEditProfile: T.func.isRequired,
   profile: T.objectOf(T.string).isRequired,
   isEditProfile: T.bool.isRequired
 };
