@@ -4,7 +4,8 @@ const initialState = {
   isLogin: false,
   profile: null,
   isRequest: false,
-  isEditProfile: false
+  isEditProfile: false,
+  userID: null
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +20,7 @@ export default (state = initialState, action) => {
         ...state,
         isRequest: false,
         isLogin: true,
+        userID: action.user
       };
     case userTypes.REGISTER_FAILURE:
       return {};
@@ -27,6 +29,7 @@ export default (state = initialState, action) => {
         ...state,
         isRequest: false,
         isLogin: true,
+        userID: action.user
       };
     case userTypes.LOGIN_FAILURE:
       return {};

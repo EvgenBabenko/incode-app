@@ -39,7 +39,7 @@ export const register = payload => (dispatch) => {
   services.userService.register(payload)
     .then(
       (data) => {
-        dispatch(registerSuccess(data));
+        dispatch(registerSuccess(data.data.id));
         history.push('/');
       },
       (error) => {
@@ -64,8 +64,9 @@ export const login = payload => (dispatch) => {
   services.userService.login(payload)
     .then(
       (data) => {
-        dispatch(loginSuccess(data));
+        dispatch(loginSuccess(data.data.id));
         history.push('/');
+        console.log('login',data.data.id);
       },
       (error) => {
         dispatch(loginFailure());

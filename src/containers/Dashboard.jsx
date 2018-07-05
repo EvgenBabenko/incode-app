@@ -17,9 +17,9 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, userID } = this.props;
 
-    dispatch(dashboardActionCreators.fetchDashboard());
+    dispatch(dashboardActionCreators.fetchDashboard(userID));
   }
 
   // componentDidUpdate(prevProps) {
