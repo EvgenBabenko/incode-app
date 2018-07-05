@@ -41,7 +41,8 @@ Conrols.propTypes = {
   title: T.string.isRequired,
   children: T.element.isRequired,
   // deleteItem: T.func.isRequired,
-  id: T.number.isRequired,
+  _id: T.string.isRequired,
+  deleteTask: T.func.isRequired,
   classes: T.objectOf(T.string).isRequired,
 };
 

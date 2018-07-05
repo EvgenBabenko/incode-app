@@ -1,40 +1,58 @@
 import userTypes from '../constants/userTypes';
 
 const initialState = {
-  userID: null,
-  profile: null,
   isLogin: false,
-  isEditProfile: false,
-  isFetching: false,
+  profile: null,
+  isRequest: false,
+  isEditProfile: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case userTypes.LOAD_PROFILE:
+    case userTypes.USER_REQUEST:
       return {
         ...state,
-        profile: action.payload,
+        isRequest: true,
       };
-    case userTypes.UDPATE_PROFILE:
+    case userTypes.REGISTER_SUCCESS:
       return {
         ...state,
-        profile: {
-          ...state,
-          profile: action.payload
-        }
-      };
-    case userTypes.USER_LOGIN:
-      return {
-        ...state,
+        isRequest: false,
         isLogin: true,
-        userID: action.user
       };
-    case userTypes.USER_LOGOUT:
+    case userTypes.REGISTER_FAILURE:
+      return {};
+    case userTypes.LOGIN_SUCCESS:
       return {
         ...state,
-        isLogin: initialState.isLogin,
-        userID: initialState.userID,
-        profile: initialState.profile,
+        isRequest: false,
+        isLogin: true,
+      };
+    case userTypes.LOGIN_FAILURE:
+      return {};
+    case userTypes.LOGOUT:
+      return {};
+    case userTypes.LOAD_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isRequest: false,
+        profile: action.user
+      };
+    case userTypes.LOAD_PROFILE_FAILURE:
+      return {
+        ...state,
+        profile: null
+      };
+    case userTypes.UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isRequest: false,
+        profile: action.user
+      };
+    case userTypes.UPDATE_PROFILE_FAILURE:
+      return {
+        ...state,
+        profile: null
       };
     case userTypes.OPEN_EDIT_PROFILE:
       return {
@@ -44,7 +62,7 @@ export default (state = initialState, action) => {
     case userTypes.CLOSE_EDIT_PROFILE:
       return {
         ...state,
-        isEditProfile: initialState.isEditProfile,
+        isEditProfile: false
       };
     default:
       return state;

@@ -19,10 +19,9 @@ const styles = {
 };
 
 const TaskList = (props) => {
-  const { classes, taskList, submitCallback, addTask} = props;
+  const { classes, taskList, addTask } = props;
 
   function submit(values) {
-    // submitCallback(values);
     addTask({ ...values });
   }
 
@@ -54,7 +53,7 @@ const TaskList = (props) => {
 
 TaskList.propTypes = {
   taskList: T.arrayOf(T.object).isRequired,
-  submitCallback: T.func.isRequired,
+  addTask: T.func.isRequired,
   classes: T.objectOf(T.string).isRequired,
 };
 

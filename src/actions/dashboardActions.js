@@ -1,36 +1,31 @@
-import axios from 'axios';
-
-import config from '../config';
 import dashboardTypes from '../constants/dashboardTypes';
+import services from '../services';
 
-axios.defaults.baseURL = config.AXIOS_URL;
+const dashboardRequest = () => ({ type: dashboardTypes.DASHBOARD_REQUEST });
+const dashboardSuccess = dashboard => ({ type: dashboardTypes.DASHBOARD_SUCCESS, dashboard });
+const dashboardFailure = () => ({ type: dashboardTypes.DASHBOARD_FAILURE });
 
-export const requestTasks = () => ({
-  type: dashboardTypes.REQUEST_TASKS
-});
+export const fetchDashboard = () => (dispatch) => {
+  dispatch(dashboardRequest());
 
-export const reseiveTasks = payload => ({
-  type: dashboardTypes.RECEIVE_TASKS,
-  payload,
-});
-
-export const reseiveTask = payload => ({
-  type: dashboardTypes.RECEIVE_TASK,
-  payload,
-});
-
-export const fetchTasks = () => (dispatch) => {
-  dispatch(requestTasks());
-
-  axios.get('/')
-    .then(({ data }) => dispatch(reseiveTasks(data)));
+  services.dashboardService.fetchDashboard()
+    .then(
+      data => dispatch(dashboardSuccess(data)),
+      error => dispatch(dashboardFailure())
+    );
 };
 
-export const fetchTask = id => (dispatch) => {
-  dispatch(requestTasks());
+const taskDetailsSuccess = taskDetails => ({ type: dashboardTypes.TASK_DETAILS_SUCCESS, taskDetails });
+const taskDetailsFailure = () => ({ type: dashboardTypes.TASK_DETAILS_FAILURE });
 
-  axios.get(`/${id}`)
-    .then(({ data }) => dispatch(reseiveTask(data)));
+export const fetchTask = id => (dispatch) => {
+  dispatch(dashboardRequest());
+
+  services.dashboardService.fetchTask(id)
+    .then(
+      data => dispatch(taskDetailsSuccess(data)),
+      error => dispatch(taskDetailsFailure())
+    );
 };
 
 export const addItem = payload => ({
@@ -39,30 +34,19 @@ export const addItem = payload => ({
 });
 
 export const addTask = payload => (dispatch) => {
-  axios.post('/', { ...payload })
-    .then(() => dispatch(fetchTasks()));
+  services.dashboardService.addTask(payload)
+    .then(() => dispatch(fetchDashboard()));
 };
 
-// export const updateTask = (id, payload) => ({
-//   type: dashboardTypes.UPDATE_TASK,
-//   id,
-//   payload,
-// });
-
 export const updateTask = (id, payload) => (dispatch) => {
-  axios.put(`/${id}`, { ...payload })
-    .then(() => dispatch(fetchTasks()))
+  services.dashboardService.updateTask(id, payload)
+    .then(() => dispatch(fetchDashboard()))
     .then(() => dispatch(fetchTask()));
 };
 
-// export const deleteTask = id => ({
-//   type: dashboardTypes.DELETE_TASK,
-//   id,
-// });
-
 export const deleteTask = id => (dispatch) => {
-  axios.delete(`/${id}`)
-    .then(() => dispatch(fetchTasks()));
+  services.dashboardService.deleteTask(id)
+    .then(() => dispatch(fetchDashboard()));
 };
 
 // export const changeTaskStatus = (id, payload) => ({

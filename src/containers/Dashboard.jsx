@@ -20,7 +20,7 @@ class Dashboard extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
-    dispatch(dashboardActionCreators.fetchTasks());
+    dispatch(dashboardActionCreators.fetchDashboard());
   }
 
   // componentDidUpdate(prevProps) {
@@ -36,14 +36,10 @@ class Dashboard extends Component {
     const { isLogin } = this.props;
 
     return (
-      !isLogin
-        ? <NoItems text="Please login for more" />
-        : (
-          <TaskList
-            {...this.props}
-            {...this.boundActionCreators}
-          />
-        )
+      <TaskList
+        {...this.props}
+        {...this.boundActionCreators}
+      />
     );
   }
 }
@@ -67,6 +63,7 @@ const mapStateToProps = state => ({
 // });
 
 Dashboard.propTypes = {
+  dispatch: T.func.isRequired,
   taskList: T.arrayOf(T.object).isRequired,
   isLogin: T.bool.isRequired,
   isEditTask: T.bool.isRequired,

@@ -2,61 +2,37 @@ import dashboardTypes from '../constants/dashboardTypes';
 
 const initialState = {
   taskList: [],
+  isRequest: false,
   isEditTask: false,
-  isFetching: false,
   taskDetails: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case dashboardTypes.REQUEST_TASKS:
+    case dashboardTypes.DASHBOARD_REQUEST:
       return {
         ...state,
-        isFetching: true,
+        isRequest: true,
       };
-    case dashboardTypes.RECEIVE_TASKS:
+    case dashboardTypes.DASHBOARD_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        taskList: action.payload,
+        isRequest: false,
+        taskList: action.dashboard,
       };
-    case dashboardTypes.RECEIVE_TASK:
+    case dashboardTypes.DASHBOARD_FAILURE:
+      return {};
+    case dashboardTypes.TASK_DETAILS_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        taskDetails: action.payload,
+        isRequest: false,
+        taskDetails: action.taskDetails,
       };
-
-    // case dashboardTypes.ADD_TASK:
-    //   return {
-    //     ...state,
-    //     taskList: state.taskList.concat(action.payload),
-    //   };
-    // case dashboardTypes.UPDATE_TASK:
-    //   return {
-    //     ...state,
-    //     taskList: state.taskList.map(task => (
-    //       task.id === action.id
-    //         ? {
-    //           ...task,
-    //           title: action.payload.title,
-    //           description: action.payload.description
-    //         }
-    //         : task)),
-    //   };
-    // case dashboardTypes.DELETE_TASK:
-    //   return {
-    //     ...state,
-    //     taskList: state.taskList.filter(task => task.id !== action.id)
-    //   };
-    // case dashboardTypes.CHANGE_TASK_STATUS:
-    //   return {
-    //     ...state,
-    //     taskList: state.taskList.map(task => (
-    //       task.id === action.id
-    //         ? { ...task, status: action.payload }
-    //         : task)),
-    //   };
+    case dashboardTypes.TASK_DETAILS_FAILURE:
+      return {
+        ...state,
+        taskDetails: null
+      };
     case dashboardTypes.OPEN_EDIT_TASK:
       return {
         ...state,

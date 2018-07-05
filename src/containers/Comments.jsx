@@ -91,9 +91,7 @@ const mapStateToProps = state => ({
 // });
 
 Comments.propTypes = {
-  taskID: T.number.isRequired,
-  isEditComment: T.bool.isRequired,
-  userID: T.number.isRequired,
+  dispatch: T.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Comments);

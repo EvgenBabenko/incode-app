@@ -19,6 +19,12 @@ class Profile extends Component {
     this.submit = this.submit.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(userActionCreators.me());
+  }
+
   submit(values) {
     const { dispatch } = this.props;
     // print the form values to the console
@@ -43,9 +49,9 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.user.profile.profile,
-  isEditProfile: state.user.isEditProfile,
-  initialValues: state.user.profile.profile,
+  // profile: state.user.profile.profile,
+  // isEditProfile: state.user.isEditProfile,
+  // initialValues: state.user.profile.profile,
 });
 
 // const mapDispatchToProps = dispatch => ({
@@ -55,6 +61,7 @@ const mapStateToProps = state => ({
 // });
 
 Profile.propTypes = {
+  dispatch: T.func.isRequired,
   profile: T.objectOf(T.string).isRequired,
   isEditProfile: T.bool.isRequired
 };

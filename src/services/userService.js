@@ -5,35 +5,10 @@ import config from '../config';
 
 axios.defaults.baseURL = config.AXIOS_URL;
 
-const logout = () => {
-  // remove user from local storage to log user out
-  localStorage.removeItem('user');
-};
-
-const handleResponse = (response) => {
-  return response.json()
-    .then((data) => {
-      console.log(response, data);
-      if (!response.ok) {
-        if (response.status === 401) {
-          // auto logout if 401 response returned from api
-          logout();
-          // location.reload(true);
-        }
-
-        const error = (data && data.error) || response.statusText;
-        return Promise.reject(error);
-      }
-
-      return data;
-    });
-};
-
-
 const register = (payload) => {
-  axios.post('/auth/register', { ...payload })
+  return axios.post('/auth/register', { ...payload })
     .then((user) => {
-      console.log(user);
+      console.log('register', user);
       // login successful if there's a jwt token in the response
       if (user.data.token) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -45,25 +20,44 @@ const register = (payload) => {
 };
 
 
-// const login = (payload) => {
-//   const requestOptions = {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({ ...payload })
-//   };
+// token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViM2RjNTQ5MzUwZDZlMmE3ZDg3NzE3NCIsImlhdCI6MTUzMDc3NDg1NywiZXhwIjoxNTMwODYxMjU3fQ.T2aoTSbVABFAcNo6eh4ldd53SIecsNYSAZ2ciV-rOO0
 
-//   return fetch('/users/authenticate', requestOptions)
-//     .then(handleResponse)
-//     .then((user) => {
-//       // login successful if there's a jwt token in the response
-//       if (user.token) {
-//         // store user details and jwt token in local storage to keep user logged in between page refreshes
-//         localStorage.setItem('user', JSON.stringify(user));
-//       }
+const login = (payload) => {
+  return axios.post('/auth/login', { ...payload })
+    .then((user) => {
+      console.log('login', user);
+      // login successful if there's a jwt token in the response
+      if (user.data.token) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(user.data));
+      }
 
-//       return user;
-//     });
-// };
+      return user;
+    });
+};
+
+const logout = () => {
+  // remove user from local storage to log user out
+  localStorage.removeItem('user');
+};
+
+const me = () => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+
+  return axios({
+    method: 'get',
+    url: '/auth/me',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'x-access-token': token
+    }
+  })
+    .then(({ data }) => {
+      console.log('me', data);
+
+      return data;
+    });
+};
 
 // function getAll() {
 //   const requestOptions = {
@@ -76,6 +70,7 @@ const register = (payload) => {
 
 export default {
   register,
-  // login,
+  login,
   logout,
+  me,
 };

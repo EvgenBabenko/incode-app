@@ -1,70 +1,75 @@
 import userTypes from '../constants/userTypes';
-import userService from '../services';
+import services from '../services';
 import history from '../helpers/history';
 
-export const loadProfile = payload => ({
-  type: userTypes.LOAD_PROFILE,
-  payload,
-});
+const userRequest = () => ({ type: userTypes.USER_REQUEST });
+const loadProfileSuccess = profile => ({ type: userTypes.LOAD_PROFILE_SUCCESS, profile });
+const loadProfileFailure = () => ({ type: userTypes.LOAD_PROFILE_FAILURE });
 
-export const updateProfile = payload => ({
-  type: userTypes.UDPATE_PROFILE,
-  payload,
-});
+export const me = () => (dispatch) => {
+  dispatch(userRequest());
 
-export const userLogin = user => ({
-  type: userTypes.USER_LOGIN,
-  user
-});
+  services.userService.me()
+    .then(
+      data => dispatch(loadProfileSuccess(data)),
+      error => dispatch(loadProfileFailure())
+    );
+};
 
-export const userLogout = () => ({
-  type: userTypes.USER_LOGOUT,
-});
+const updateProfileSuccess = profile => ({ type: userTypes.UPDATE_PROFILE_SUCCESS, profile });
+const updateProfileFailure = () => ({ type: userTypes.UPDATE_PROFILE_FAILURE });
 
-export const openEditProfile = () => ({
-  type: userTypes.OPEN_EDIT_PROFILE
-});
+export const updateProfile = () => {
+  // need write request to server
+};
 
-export const closeEditProfile = () => ({
-  type: userTypes.CLOSE_EDIT_PROFILE
-});
+export const openEditProfile = () => ({ type: userTypes.OPEN_EDIT_PROFILE });
 
-
+export const closeEditProfile = () => ({ type: userTypes.CLOSE_EDIT_PROFILE });
 
 // https://medium.freecodecamp.org/securing-node-js-restful-apis-with-json-web-tokens-9f811a92bb52
 // http://jasonwatmore.com/post/2017/12/07/react-redux-jwt-authentication-tutorial-example
 
-
+const registerSuccess = user => ({ type: userTypes.REGISTER_SUCCESS, user });
+const registerFailure = () => ({ type: userTypes.REGISTER_FAILURE });
 
 export const register = payload => (dispatch) => {
-  dispatch(userLogin());
+  dispatch(userRequest());
 
-  userService.register(payload)
-    .then((user) => {
-      dispatch(userLogin(user));
-      history.push('/');
-    });
+  services.userService.register(payload)
+    .then(
+      (data) => {
+        dispatch(registerSuccess(data));
+        history.push('/');
+      },
+      (error) => {
+        dispatch(registerFailure());
+        history.push('/');
+      }
+    );
 };
 
+export const logout = () => {
+  services.userService.logout();
 
+  return { type: userTypes.LOGOUT };
+};
 
+const loginSuccess = user => ({ type: userTypes.LOGIN_SUCCESS, user });
+const loginFailure = () => ({ type: userTypes.LOGIN_FAILURE });
 
-// export const login = (username, password) => (dispatch) => {
-//   dispatch(request({ username }));
+export const login = payload => (dispatch) => {
+  dispatch(userRequest());
 
-//   userService.login(username, password)
-//     .then(
-//       (user) => {
-//         dispatch(success(user));
-//         history.push('/');
-//       },
-//       (error) => {
-//         dispatch(failure(error));
-//         dispatch(alertActions.error(error));
-//       }
-//     );
-// };
-
-// function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-// function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-// function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+  services.userService.login(payload)
+    .then(
+      (data) => {
+        dispatch(loginSuccess(data));
+        history.push('/');
+      },
+      (error) => {
+        dispatch(loginFailure());
+        history.push('/');
+      }
+    );
+};

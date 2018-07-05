@@ -6,19 +6,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-class Dropdown extends Component {
+class StatusDropdown extends Component {
   handleChange = (event) => {
-    const { changeTaskStatus, _id, status, updateTask } = this.props;
-
-    // console.log('changed', status);
-    // changeTaskStatus(id, event.target.value);
+    const { _id, updateTask } = this.props;
 
     updateTask(_id, { status: event.target.value });
   };
 
   render() {
     const { status } = this.props;
-    console.log('dropdown', this.props);
+
     return (
       <form autoComplete="off">
         <FormControl>
@@ -52,10 +49,10 @@ class Dropdown extends Component {
   }
 }
 
-Dropdown.propTypes = {
-  changeTaskStatus: T.func.isRequired,
-  id: T.number.isRequired,
+StatusDropdown.propTypes = {
+  updateTask: T.func.isRequired,
+  _id: T.string.isRequired,
   status: T.string.isRequired,
 };
 
-export default Dropdown;
+export default StatusDropdown;

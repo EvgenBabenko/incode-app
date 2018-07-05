@@ -6,7 +6,7 @@ import LoginForm from '../components/Forms/LoginForm';
 
 import * as userActionCreators from '../actions/userActions';
 
-class FakeRegister extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -15,14 +15,13 @@ class FakeRegister extends Component {
 
   submit(values) {
     const { dispatch } = this.props;
-    console.log(this.props)
 
-    dispatch(userActionCreators.register(values));
+    dispatch(userActionCreators.login(values));
   }
 
   render() {
     return (
-      <LoginForm onSubmit={this.submit} />
+      <LoginForm onSubmit={this.submit} title="Please login" primaryTitle="Login" secondaryTitle="Register" action="/register" />
     );
   }
 }
@@ -31,8 +30,8 @@ const mapStateToProps = state => ({
   isLogin: state.user.isLogin,
 });
 
-// FakeRegister.propTypes = {
-//   userLogin: T.func.isRequired,
-// };
+Login.propTypes = {
+  dispatch: T.func.isRequired,
+};
 
-export default connect(mapStateToProps)(FakeRegister);
+export default connect(mapStateToProps)(Login);

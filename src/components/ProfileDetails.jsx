@@ -34,13 +34,13 @@ const ProfileDetails = (props) => {
 
   return (
     <div className={classes.row}>
-      {Object.keys(profile).map((key, index) => key === 'avatar'
+      {/* {Object.keys(profile).map((key, index) => key === 'avatar'
         ? <Avatar key={index} src={profile[key]} className={classNames(classes.avatar, classes.bigAvatar)} />
         : (
           <p key={index} className={classNames(classes.line)}>
             {`${key}: ${profile[key]}`}
           </p>
-        ))}
+        ))} */}
 
       <div>
         <Button onClick={openEditProfile} color="primary" variant="contained">
