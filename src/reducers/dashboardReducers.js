@@ -43,6 +43,8 @@ export default (state = initialState, action) => {
         ...state,
         isEditTask: initialState.isEditTask,
       };
+    case dashboardTypes.CLEAR_DASHBOARD:
+      return initialState;
     default:
       return state;
   }

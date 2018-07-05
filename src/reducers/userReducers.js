@@ -36,6 +36,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isRequest: false,
+        isLogin: true,
         profile: action.user
       };
     case userTypes.LOAD_PROFILE_FAILURE:

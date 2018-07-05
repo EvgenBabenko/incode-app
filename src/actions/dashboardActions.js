@@ -41,7 +41,7 @@ export const addTask = payload => (dispatch) => {
 export const updateTask = (id, payload) => (dispatch) => {
   services.dashboardService.updateTask(id, payload)
     .then(() => dispatch(fetchDashboard()))
-    .then(() => dispatch(fetchTask()));
+    .then(() => dispatch(fetchTask(id)));
 };
 
 export const deleteTask = id => (dispatch) => {
