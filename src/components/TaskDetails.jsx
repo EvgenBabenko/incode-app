@@ -11,8 +11,6 @@ const TaskDetails = (props) => {
     }
   } = props;
 
-  console.log('taskDetails', props);
-
   return (
     <React.Fragment>
       <h2>

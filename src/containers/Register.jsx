@@ -15,7 +15,6 @@ class Register extends Component {
 
   submit(values) {
     const { dispatch } = this.props;
-    console.log(this.props)
 
     dispatch(userActionCreators.register(values));
   }

@@ -1,7 +1,7 @@
 import commentTypes from '../constants/commentTypes';
 
 const newComment = payload => ({
-  id: Date.now(),
+  _id: Date.now(),
   content: payload.content,
   createdAt: Date.now(),
   updatetAt: Date.now(),

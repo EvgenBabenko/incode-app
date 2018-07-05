@@ -18,8 +18,6 @@ class AddNew extends React.Component {
 
     this.setState({ open: true });
 
-    console.log('handleOpenDialog', this.props);
-
     if (edit) openEdit();
   };
 

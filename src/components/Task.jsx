@@ -74,6 +74,7 @@ const Task = (props) => {
 Task.propTypes = {
   title: T.string.isRequired,
   _id: T.string.isRequired,
+  updateTask: T.func.isRequired,
   openEditTask: T.func.isRequired,
   closeEditTask: T.func.isRequired,
   classes: T.objectOf(T.string).isRequired,

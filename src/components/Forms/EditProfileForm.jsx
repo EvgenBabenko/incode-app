@@ -16,8 +16,6 @@ const EditProfileForm = (props) => {
     handleSubmit, pristine, reset, submitting, closeEditProfile
   } = props;
 
-  console.log('EditProfileForm', props);
-
   return (
     <form onSubmit={handleSubmit}>
       <InputTemplate name="firstName" label="First name" type="text" />

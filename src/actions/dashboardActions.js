@@ -49,12 +49,6 @@ export const deleteTask = id => (dispatch) => {
     .then(() => dispatch(fetchDashboard()));
 };
 
-// export const changeTaskStatus = (id, payload) => ({
-//   type: dashboardTypes.CHANGE_TASK_STATUS,
-//   id,
-//   payload,
-// });
-
 export const openEditTask = () => ({
   type: dashboardTypes.OPEN_EDIT_TASK
 });

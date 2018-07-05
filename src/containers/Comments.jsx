@@ -33,15 +33,10 @@ class Comments extends Component {
   // }
 
   getComments() {
-    const { taskID } = this.props;
-
-    const { dispatch } = this.props;
+    const { taskID, dispatch } = this.props;
 
     const comments = Object.values(mock.comment).filter(comment => comment.taskID === taskID);
 
-    console.log('comments', comments);
-
-    // loadComments(comments);
     const loadComments = commentActionCreators.loadComments(comments);
     dispatch(loadComments);
   }
@@ -56,10 +51,8 @@ class Comments extends Component {
     console.log('submit', values, isEditComment, commentID);
 
     if (isEditComment) {
-      // updateComment(commentID, values);
       dispatch(commentActionCreators.updateComment(commentID, values));
     } else {
-      // addComment({ ...values, userID, taskID });
       dispatch(commentActionCreators.addComment({ ...values, userID, taskID }));
     }
   }

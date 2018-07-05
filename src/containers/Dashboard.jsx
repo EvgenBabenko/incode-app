@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import T from 'prop-types';
 
-import NoItems from '../components/NoItems';
 import TaskList from '../components/TaskList';
 
 import * as dashboardActionCreators from '../actions/dashboardActions';
@@ -33,8 +32,6 @@ class Dashboard extends Component {
   // }
 
   render() {
-    const { isLogin } = this.props;
-
     return (
       <TaskList
         {...this.props}

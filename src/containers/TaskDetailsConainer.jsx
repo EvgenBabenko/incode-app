@@ -50,12 +50,11 @@ const mapStateToProps = state => ({
 TaskDetailsContainer.propTypes = {
   dispatch: T.func.isRequired,
   match: T.objectOf(T.object).isRequired,
-  taskDetails: T.objectOf(T.string).isRequired,
-  getTaskDetails: T.func,
+  taskDetails: T.objectOf(T.string),
 };
 
 TaskDetailsContainer.defaultProps = {
-  getTaskDetails: undefined,
+  taskDetails: null,
 };
 
 export default connect(mapStateToProps)(TaskDetailsContainer);

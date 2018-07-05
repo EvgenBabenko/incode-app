@@ -10,10 +10,8 @@ import NoItems from './NoItems';
 
 const CommentList = (props) => {
   const { commentList, submitCallback } = props;
-  console.log(1, props);
 
   function submit(values) {
-    console.log(values);
     submitCallback(values);
   }
 
@@ -30,7 +28,7 @@ const CommentList = (props) => {
               Comments
             </h2>
             <List>
-              {commentList.map(comment => <Comment key={comment.id} {...comment} {...props} />)}
+              {commentList.map(comment => <Comment key={comment._id} {...comment} {...props} />)}
             </List>
           </React.Fragment>
         )
