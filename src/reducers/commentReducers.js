@@ -49,19 +49,19 @@ export default (state = initialState, action) => {
   }
 };
 
-const actions = {
-  [comentsType.LOAD_COMMENTS]: (state, action) => {
-    return {
-      ...state,
-      commentList: action.payload,
-    };
-  }
-};
+// const actions = {
+//   [comentsType.LOAD_COMMENTS]: (state, action) => {
+//     return {
+//       ...state,
+//       commentList: action.payload,
+//     };
+//   }
+// };
 
 
-export default (state = initialState, action) => {
-  const actionType = action.type;
+// export default (state = initialState, action) => {
+//   const actionType = action.type;
 
-  return actions[actionType] && actions[actionType](state.) || state;
-};
+//   return actions[actionType] && actions[actionType](state) || state;
+// };
 
