@@ -5,10 +5,12 @@ const dashboardRequest = () => ({ type: dashboardTypes.DASHBOARD_REQUEST });
 const dashboardSuccess = dashboard => ({ type: dashboardTypes.DASHBOARD_SUCCESS, dashboard });
 const dashboardFailure = () => ({ type: dashboardTypes.DASHBOARD_FAILURE });
 
-export const fetchDashboard = userID => (dispatch) => {
+// export const fetchDashboard = userID => (dispatch) => {
+export const fetchDashboard = () => (dispatch) => {
   dispatch(dashboardRequest());
 
-  services.dashboardService.fetchDashboard(userID)
+  // services.dashboardService.fetchDashboard(userID)
+  services.dashboardService.fetchDashboard()
     .then(
       data => dispatch(dashboardSuccess(data)),
       error => dispatch(dashboardFailure())

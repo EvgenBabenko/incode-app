@@ -2,7 +2,7 @@ import userTypes from '../constants/userTypes';
 
 const initialState = {
   isLogin: false,
-  profile: null,
+  profile: {},
   isRequest: false,
   isEditProfile: false,
   userID: null
@@ -23,25 +23,46 @@ export default (state = initialState, action) => {
         userID: action.user
       };
     case userTypes.REGISTER_FAILURE:
-      return {};
-    case userTypes.LOGIN_SUCCESS:
       return {
         ...state,
+        ...initialState
+      };
+    case userTypes.LOGIN_SUCCESS:
+      return Object.assign({}, state, {
         isRequest: false,
         isLogin: true,
         userID: action.user
-      };
+      });
+      // return {
+      //   ...state,
+      //   isRequest: false,
+      //   isLogin: true,
+      //   userID: action.user
+      // };
     case userTypes.LOGIN_FAILURE:
-      return {};
-    case userTypes.LOGOUT:
-      return {};
-    case userTypes.LOAD_PROFILE_SUCCESS:
       return {
         ...state,
+        ...initialState
+      };
+    case userTypes.LOGOUT:
+      return {
+        ...state,
+        ...initialState
+      };
+    case userTypes.LOAD_PROFILE_SUCCESS:
+      return Object.assign({}, state, {
         isRequest: false,
         isLogin: true,
-        profile: action.user
-      };
+        userID: action.data._id,
+        profile: action.data.profile
+      });
+      // return {
+      //   ...state,
+      //   isRequest: false,
+      //   isLogin: true,
+      //   userID: action.data.id,
+      //   profile: action.data.profile
+      // };
     case userTypes.LOAD_PROFILE_FAILURE:
       return {
         ...state,

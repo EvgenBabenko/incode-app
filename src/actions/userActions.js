@@ -3,7 +3,7 @@ import services from '../services';
 import history from '../helpers/history';
 
 const userRequest = () => ({ type: userTypes.USER_REQUEST });
-const loadProfileSuccess = profile => ({ type: userTypes.LOAD_PROFILE_SUCCESS, profile });
+const loadProfileSuccess = data => ({ type: userTypes.LOAD_PROFILE_SUCCESS, data });
 const loadProfileFailure = () => ({ type: userTypes.LOAD_PROFILE_FAILURE });
 
 export const me = () => (dispatch) => {
@@ -19,8 +19,13 @@ export const me = () => (dispatch) => {
 const updateProfileSuccess = profile => ({ type: userTypes.UPDATE_PROFILE_SUCCESS, profile });
 const updateProfileFailure = () => ({ type: userTypes.UPDATE_PROFILE_FAILURE });
 
-export const updateProfile = () => {
+export const updateProfile = (id, payload) => (dispatch) => {
   // need write request to server
+  dispatch(userRequest());
+
+  services.userService.updateProfile(id, payload)
+    .then(() => dispatch(me()));
+  // .then(data => dispatch(updateProfileSuccess(data)));
 };
 
 export const openEditProfile = () => ({ type: userTypes.OPEN_EDIT_PROFILE });
@@ -66,7 +71,7 @@ export const login = payload => (dispatch) => {
       (data) => {
         dispatch(loginSuccess(data.data.id));
         history.push('/');
-        console.log('login',data.data.id);
+        console.log('login', data.data.id);
       },
       (error) => {
         dispatch(loginFailure());

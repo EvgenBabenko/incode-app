@@ -26,14 +26,12 @@ class Profile extends Component {
   }
 
   submit(values) {
-    const { dispatch } = this.props;
-    // print the form values to the console
-    console.log(values);
+    const { dispatch, userID } = this.props;
 
-    // updateProfile(values);
-    dispatch(userActionCreators.updateProfile(values));
+    console.log('profile', values, this.props, userID);
 
-    // closeEditProfile();
+    dispatch(userActionCreators.updateProfile(userID, values));
+
     dispatch(userActionCreators.closeEditProfile());
   }
 
@@ -49,9 +47,10 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => ({
-  // profile: state.user.profile.profile,
-  // isEditProfile: state.user.isEditProfile,
-  // initialValues: state.user.profile.profile,
+  profile: state.user.profile,
+  userID: state.user.userID,
+  isEditProfile: state.user.isEditProfile,
+  initialValues: state.user.profile,
 });
 
 // const mapDispatchToProps = dispatch => ({

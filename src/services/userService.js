@@ -53,9 +53,12 @@ const me = () => {
     });
 };
 
+const updateProfile = (id, payload) => axios.put(`/user/${id}`, { ...payload });
+
 export default {
   register,
   login,
   logout,
   me,
+  updateProfile,
 };
