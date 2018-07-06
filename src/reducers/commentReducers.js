@@ -48,3 +48,20 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+const actions = {
+  [comentsType.LOAD_COMMENTS]: (state, action) => {
+    return {
+      ...state,
+      commentList: action.payload,
+    };
+  }
+};
+
+
+export default (state = initialState, action) => {
+  const actionType = action.type;
+
+  return actions[actionType] && actions[actionType](state.) || state;
+};
+
