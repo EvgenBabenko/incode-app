@@ -1,7 +1,7 @@
-import commentsTypes from './types';
+import commentTypes from '../constants/commentTypes';
 
 const newComment = payload => ({
-  id: Date.now(),
+  _id: Date.now(),
   content: payload.content,
   createdAt: Date.now(),
   updatetAt: Date.now(),
@@ -10,30 +10,30 @@ const newComment = payload => ({
 });
 
 export const loadComments = payload => ({
-  type: commentsTypes.LOAD_COMMENTS,
+  type: commentTypes.LOAD_COMMENTS,
   payload,
 });
 
 export const addComment = payload => ({
-  type: commentsTypes.ADD_COMMENT,
+  type: commentTypes.ADD_COMMENT,
   payload: newComment(payload),
 });
 
 export const updateComment = (id, payload) => ({
-  type: commentsTypes.UPDATE_COMMENT,
+  type: commentTypes.UPDATE_COMMENT,
   id,
   payload,
 });
 
 export const deleteComment = id => ({
-  type: commentsTypes.DELETE_COMMENT,
+  type: commentTypes.DELETE_COMMENT,
   id,
 });
 
 export const openEditComment = () => ({
-  type: commentsTypes.OPEN_EDIT_COMMENT
+  type: commentTypes.OPEN_EDIT_COMMENT
 });
 
 export const closeEditComment = () => ({
-  type: commentsTypes.CLOSE_EDIT_COMMENT
+  type: commentTypes.CLOSE_EDIT_COMMENT
 });

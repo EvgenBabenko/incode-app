@@ -6,8 +6,7 @@ import T from 'prop-types';
 import ProfileDetails from '../components/ProfileDetails';
 import EditProfileForm from '../components/Forms/EditProfileForm';
 
-// import { userActions } from '../modules/user';
-import * as userActionCreators from '../modules/user/actions';
+import * as userActionCreators from '../actions/userActions';
 
 class Profile extends Component {
   constructor(props) {
@@ -20,18 +19,20 @@ class Profile extends Component {
     this.submit = this.submit.bind(this);
   }
 
-  submit(values) {
+  componentDidMount() {
     const { dispatch } = this.props;
-    // print the form values to the console
-    console.log(values);
 
-    // updateProfile(values);
-    const updateProfile = userActionCreators.updateProfile(values);
-    dispatch(updateProfile);
+    dispatch(userActionCreators.me());
+  }
 
-    // closeEditProfile();
-    const closeEditProfile = userActionCreators.closeEditProfile();
-    dispatch(closeEditProfile);
+  submit(values) {
+    const { dispatch, userID } = this.props;
+
+    console.log('profile', values, this.props, userID);
+
+    dispatch(userActionCreators.updateProfile(userID, values));
+
+    dispatch(userActionCreators.closeEditProfile());
   }
 
   render() {
@@ -46,9 +47,10 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.user.profile.profile,
+  profile: state.user.profile,
+  userID: state.user.userID,
   isEditProfile: state.user.isEditProfile,
-  initialValues: state.user.profile.profile,
+  initialValues: state.user.profile,
 });
 
 // const mapDispatchToProps = dispatch => ({
@@ -58,8 +60,7 @@ const mapStateToProps = state => ({
 // });
 
 Profile.propTypes = {
-  // updateProfile: T.func.isRequired,
-  // closeEditProfile: T.func.isRequired,
+  dispatch: T.func.isRequired,
   profile: T.objectOf(T.string).isRequired,
   isEditProfile: T.bool.isRequired
 };

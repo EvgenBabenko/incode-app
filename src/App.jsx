@@ -2,8 +2,15 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import store from './modules/store';
+import store from './helpers/store';
 import Layout from './components/Layout';
+import * as userActions from './actions/userActions';
+
+const hasUserToken = JSON.parse(localStorage.getItem('user'));
+
+if (hasUserToken) {
+  store.dispatch(userActions.me());
+}
 
 const App = () => (
   <Provider store={store}>

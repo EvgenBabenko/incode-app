@@ -19,18 +19,22 @@ const styles = {
 };
 
 const TaskList = (props) => {
-  const { classes, taskList, submitCallback, addTask} = props;
+  const { classes, taskList, addTask, isAdmin } = props;
 
   function submit(values) {
-    // submitCallback(values);
     addTask({ ...values });
   }
 
   return (
     <React.Fragment>
-      <AddNew title="New task">
-        <TaskForm onSubmit={submit} {...props} />
-      </AddNew>
+      {isAdmin
+        ? (
+          <AddNew title="New task">
+            <TaskForm onSubmit={submit} {...props} />
+          </AddNew>
+        )
+        : null
+      }
 
       {taskList.length
         ? (
@@ -54,7 +58,7 @@ const TaskList = (props) => {
 
 TaskList.propTypes = {
   taskList: T.arrayOf(T.object).isRequired,
-  submitCallback: T.func.isRequired,
+  addTask: T.func.isRequired,
   classes: T.objectOf(T.string).isRequired,
 };
 

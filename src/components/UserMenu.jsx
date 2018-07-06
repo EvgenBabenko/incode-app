@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import T from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -7,6 +6,8 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+
+import history from '../helpers/history';
 
 const styles = {
   link: {
@@ -18,24 +19,34 @@ const styles = {
 };
 
 class UserMenu extends Component {
-  state = {
-    anchorEl: null,
-  };
+  constructor(props) {
+    super(props);
 
-  handleOpenMenu = (event) => {
+    this.state = {
+      anchorEl: null,
+    };
+
+    this.handleOpenMenu = this.handleOpenMenu.bind(this);
+    this.handleCloseMenu = this.handleCloseMenu.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleOpenMenu(event) {
     this.setState({ anchorEl: event.currentTarget });
-  };
+  }
 
-  handleCloseMenu = () => {
+  handleCloseMenu() {
     this.setState({ anchorEl: null });
-  };
 
-  handleLogout = () => {
-    const { userLogout } = this.props;
+    history.push('/profile');
+  }
 
-    userLogout();
+  handleLogout() {
+    const { dispatch, logout } = this.props;
 
     this.handleCloseMenu();
+
+    dispatch(logout());
   }
 
   render() {
@@ -67,11 +78,9 @@ class UserMenu extends Component {
           open={open}
           onClose={this.handleCloseMenu}
         >
-          <Link to="/profile" className={classes.link}>
-            <MenuItem onClick={this.handleCloseMenu}>
-              Profile
-            </MenuItem>
-          </Link>
+          <MenuItem onClick={this.handleCloseMenu}>
+            Profile
+          </MenuItem>
           <MenuItem onClick={this.handleLogout}>
             Logout
           </MenuItem>
@@ -82,7 +91,6 @@ class UserMenu extends Component {
 }
 
 UserMenu.propTypes = {
-  userLogout: T.func.isRequired,
   classes: T.objectOf(T.string).isRequired,
 };
 

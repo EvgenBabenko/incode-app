@@ -34,12 +34,11 @@ const styles = theme => ({
 
 const Task = (props) => {
   const {
-    title, description, classes, _id, deleteTask, submitCallback, openEditTask, closeEditTask, updateTask
+    title, description, classes, _id, openEditTask, closeEditTask, updateTask
   } = props;
 
   function submit(values) {
     updateTask(_id, values);
-    // submitCallback(values, _id);
   }
 
   return (
@@ -62,7 +61,7 @@ const Task = (props) => {
       </Link>
 
       <ListItemSecondaryAction>
-        <Controls {...props} title="Edit task" openEdit={openEditTask} closeEdit={closeEditTask} deleteItem={deleteTask}>
+        <Controls {...props} title="Edit task" openEdit={openEditTask} closeEdit={closeEditTask}>
           <TaskForm onSubmit={submit} {...props} />
         </Controls>
         <StatusDropdown {...props} />
@@ -74,9 +73,8 @@ const Task = (props) => {
 
 Task.propTypes = {
   title: T.string.isRequired,
-  id: T.number.isRequired,
-  deleteTask: T.func.isRequired,
-  submitCallback: T.func.isRequired,
+  _id: T.string.isRequired,
+  updateTask: T.func.isRequired,
   openEditTask: T.func.isRequired,
   closeEditTask: T.func.isRequired,
   classes: T.objectOf(T.string).isRequired,

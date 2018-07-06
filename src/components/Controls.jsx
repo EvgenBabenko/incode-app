@@ -15,7 +15,7 @@ const styles = {
 
 const Conrols = (props) => {
   const {
-    title, children, _id, classes, deleteTask
+    title, children, _id, classes, deleteTask, isAdmin
   } = props;
 
   function handleDeleteItem() {
@@ -23,17 +23,24 @@ const Conrols = (props) => {
   }
 
   return (
-    <div className={classes.root}>
-      <AddNew title={title} edit {...props}>
-        {children}
-      </AddNew>
-      {/* <Button variant="fab" color="secondary" aria-label="edit" mini>
+    <React.Fragment>
+      {isAdmin
+        ? (
+          <div className={classes.root}>
+            <AddNew title={title} edit {...props}>
+              {children}
+            </AddNew>
+            {/* <Button variant="fab" color="secondary" aria-label="edit" mini>
         <EditIcon />
       </Button> */}
-      <Button onClick={handleDeleteItem} variant="fab" aria-label="delete" mini>
-        <DeleteIcon />
-      </Button>
-    </div>
+            <Button onClick={handleDeleteItem} variant="fab" aria-label="delete" mini>
+              <DeleteIcon />
+            </Button>
+          </div>
+        )
+        : null
+      }
+    </React.Fragment>
   );
 };
 
@@ -41,7 +48,8 @@ Conrols.propTypes = {
   title: T.string.isRequired,
   children: T.element.isRequired,
   // deleteItem: T.func.isRequired,
-  id: T.number.isRequired,
+  _id: T.string.isRequired,
+  deleteTask: T.func.isRequired,
   classes: T.objectOf(T.string).isRequired,
 };
 

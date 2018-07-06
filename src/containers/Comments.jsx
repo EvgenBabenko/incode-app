@@ -5,8 +5,7 @@ import T from 'prop-types';
 
 import CommentList from '../components/CommentList';
 
-// import { commentsActions } from '../modules/comments';
-import * as commentActionCreators from '../modules/comments/actions';
+import * as commentActionCreators from '../actions/commentActions';
 import * as mock from '../fixtures';
 
 class Comments extends Component {
@@ -34,15 +33,10 @@ class Comments extends Component {
   // }
 
   getComments() {
-    const { taskID } = this.props;
-
-    const { dispatch } = this.props;
+    const { taskID, dispatch } = this.props;
 
     const comments = Object.values(mock.comment).filter(comment => comment.taskID === taskID);
 
-    console.log('comments', comments);
-
-    // loadComments(comments);
     const loadComments = commentActionCreators.loadComments(comments);
     dispatch(loadComments);
   }
@@ -57,19 +51,13 @@ class Comments extends Component {
     console.log('submit', values, isEditComment, commentID);
 
     if (isEditComment) {
-      // updateComment(commentID, values);
-      const updateComment = commentActionCreators.updateComment(commentID, values);
-      dispatch(updateComment);
+      dispatch(commentActionCreators.updateComment(commentID, values));
     } else {
-      // addComment({ ...values, userID, taskID });
-      const addComment = commentActionCreators.addComment({ ...values, userID, taskID });
-      dispatch(addComment);
+      dispatch(commentActionCreators.addComment({ ...values, userID, taskID }));
     }
   }
 
   render() {
-    console.log('comments', this.props);
-
     return (
       <CommentList
         submitCallback={this.submitCallback}
@@ -96,12 +84,7 @@ const mapStateToProps = state => ({
 // });
 
 Comments.propTypes = {
-  // loadComments: T.func.isRequired,
-  taskID: T.number.isRequired,
-  isEditComment: T.bool.isRequired,
-  // addComment: T.func.isRequired,
-  // updateComment: T.func.isRequired,
-  userID: T.number.isRequired,
+  dispatch: T.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Comments);

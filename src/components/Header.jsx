@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import T from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -8,7 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import Auth from '../containers/Auth';
+import LoginButtonContainer from '../containers/LoginButtonContainer';
+import history from '../helpers/history';
 
 const styles = {
   root: {
@@ -26,19 +26,21 @@ const styles = {
 const Header = (props) => {
   const { classes } = props;
 
+  function handleRedirect() {
+    history.push('/');
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="/">
-            <Button color="default">
-              Home
-            </Button>
-          </Link>
+          <Button onClick={handleRedirect} color="default">
+            Home
+          </Button>
           <Typography variant="title" color="inherit" className={classes.flex}>
             InCode-App
           </Typography>
-          <Auth />
+          <LoginButtonContainer />
         </Toolbar>
       </AppBar>
     </div>

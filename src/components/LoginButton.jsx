@@ -4,15 +4,20 @@ import T from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 import UserMenu from './UserMenu';
+import history from '../helpers/history';
 
 const User = (props) => {
-  const { isLogin, authorization } = props;
+  const { isLogin } = props;
+
+  function handleRedirect() {
+    history.push('/');
+  }
 
   return (
     <React.Fragment>
       {!isLogin
         ? (
-          <Button onClick={authorization} color="inherit">
+          <Button onClick={handleRedirect} color="inherit">
             Login
           </Button>
         )
@@ -24,7 +29,6 @@ const User = (props) => {
 
 User.propTypes = {
   isLogin: T.bool.isRequired,
-  authorization: T.func.isRequired
 };
 
 export default User;

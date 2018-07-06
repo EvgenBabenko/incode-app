@@ -5,9 +5,7 @@ import T from 'prop-types';
 
 import TaskDetails from '../components/TaskDetails';
 
-// import { dashboardActions } from '../modules/dashboard';
-import * as dashboardActionCreators from '../modules/dashboard/actions';
-import * as mock from '../fixtures';
+import * as dashboardActionCreators from '../actions/dashboardActions';
 
 class TaskDetailsContainer extends Component {
   constructor(props) {
@@ -16,25 +14,14 @@ class TaskDetailsContainer extends Component {
     const { dispatch } = props;
 
     this.boundActionCreators = bindActionCreators(dashboardActionCreators, dispatch);
-
-    // const { match: { params: { id: taskID } } } = props;
-
-    // this.taskDetails = mock.task[taskID];
-
-    // console.log('TaskDetails', props, this.taskDetails);
-
-    // this.getTaskDetails = this.getTaskDetails(taskID);
   }
 
   componentDidMount() {
     const { match: { params: { id } } } = this.props;
 
-    console.log('sdrtfesdrtf', id, this.props);
-
     const { dispatch } = this.props;
 
-    const fetchTask = dashboardActionCreators.fetchTask(id);
-    dispatch(fetchTask);
+    dispatch(dashboardActionCreators.fetchTask(id));
   }
 
   render() {
@@ -61,13 +48,13 @@ const mapStateToProps = state => ({
 // });
 
 TaskDetailsContainer.propTypes = {
+  dispatch: T.func.isRequired,
   match: T.objectOf(T.object).isRequired,
-  taskDetails: T.objectOf(T.string).isRequired,
-  getTaskDetails: T.func,
+  taskDetails: T.objectOf(T.string),
 };
 
 TaskDetailsContainer.defaultProps = {
-  getTaskDetails: undefined,
+  taskDetails: null,
 };
 
 export default connect(mapStateToProps)(TaskDetailsContainer);

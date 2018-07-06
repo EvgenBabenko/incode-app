@@ -10,13 +10,11 @@ import Controls from './Controls';
 
 const Comment = (props) => {
   const {
-    content, id, createdAt, deleteComment, submitCallback, openEditComment, closeEditComment, classes
+    content, _id, createdAt, deleteComment, submitCallback, openEditComment, closeEditComment
   } = props;
 
   function submit(values) {
-    console.log(values);
-
-    submitCallback(values, id);
+    submitCallback(values, _id);
   }
 
   return (
@@ -35,11 +33,10 @@ const Comment = (props) => {
 Comment.propTypes = {
   content: T.string.isRequired,
   id: T.number.isRequired,
-  createdAt: T.string.isRequired,
+  createdAt: T.number.isRequired,
   submitCallback: T.func.isRequired,
   openEditComment: T.func.isRequired,
   closeEditComment: T.func.isRequired,
-  classes: T.objectOf(T.string).isRequired,
   deleteComment: T.func.isRequired,
 };
 
