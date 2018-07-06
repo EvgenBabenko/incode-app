@@ -44,6 +44,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   userID: state.user.userID,
+  isAdmin: state.user.isAdmin,
   isLogin: state.user.isLogin,
   taskList: state.dashboard.taskList,
   isEditTask: state.dashboard.isEditTask,

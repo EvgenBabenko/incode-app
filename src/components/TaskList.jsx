@@ -19,7 +19,7 @@ const styles = {
 };
 
 const TaskList = (props) => {
-  const { classes, taskList, addTask } = props;
+  const { classes, taskList, addTask, isAdmin } = props;
 
   function submit(values) {
     addTask({ ...values });
@@ -27,9 +27,14 @@ const TaskList = (props) => {
 
   return (
     <React.Fragment>
-      <AddNew title="New task">
-        <TaskForm onSubmit={submit} {...props} />
-      </AddNew>
+      {isAdmin
+        ? (
+          <AddNew title="New task">
+            <TaskForm onSubmit={submit} {...props} />
+          </AddNew>
+        )
+        : null
+      }
 
       {taskList.length
         ? (

@@ -5,7 +5,8 @@ const initialState = {
   profile: {},
   isRequest: false,
   isEditProfile: false,
-  userID: null
+  userID: null,
+  isAdmin: false,
 };
 
 export default (state = initialState, action) => {
@@ -16,12 +17,12 @@ export default (state = initialState, action) => {
         isRequest: true,
       };
     case userTypes.REGISTER_SUCCESS:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         isRequest: false,
         isLogin: true,
-        userID: action.user
-      };
+        userID: action.user.id,
+        isAdmin: action.user.role === 'admin'
+      });
     case userTypes.REGISTER_FAILURE:
       return {
         ...state,
@@ -31,14 +32,9 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isRequest: false,
         isLogin: true,
-        userID: action.user
+        userID: action.user.id,
+        isAdmin: action.user.role === 'admin'
       });
-      // return {
-      //   ...state,
-      //   isRequest: false,
-      //   isLogin: true,
-      //   userID: action.user
-      // };
     case userTypes.LOGIN_FAILURE:
       return {
         ...state,
@@ -54,15 +50,9 @@ export default (state = initialState, action) => {
         isRequest: false,
         isLogin: true,
         userID: action.data._id,
-        profile: action.data.profile
+        profile: action.data.profile,
+        isAdmin: action.data.role === 'admin'
       });
-      // return {
-      //   ...state,
-      //   isRequest: false,
-      //   isLogin: true,
-      //   userID: action.data.id,
-      //   profile: action.data.profile
-      // };
     case userTypes.LOAD_PROFILE_FAILURE:
       return {
         ...state,

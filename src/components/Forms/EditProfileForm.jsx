@@ -18,6 +18,7 @@ const EditProfileForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <InputTemplate name="avatar" label="Avatar" type="text" />
       <InputTemplate name="firstName" label="First name" type="text" />
       <InputTemplate name="lastName" label="Last name" type="text" />
       <InputTemplate name="email" label="Email" type="text" />
