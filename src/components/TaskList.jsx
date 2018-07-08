@@ -10,16 +10,10 @@ import NoItems from './NoItems';
 import AddNew from './AddNew';
 import TaskForm from './Forms/TaskForm';
 
-const styles = {
-  // taskList: {
-  //   display: 'flex',
-  //   flexWrap: 'wrap',
-  //   alignItems: 'start',
-  // },
-};
-
 const TaskList = (props) => {
-  const { classes, taskList, addTask, isAdmin } = props;
+  const {
+    classes, taskList, addTask, isAdmin
+  } = props;
 
   function submit(values) {
     addTask({ ...values });
@@ -38,9 +32,9 @@ const TaskList = (props) => {
 
       {taskList.length
         ? (
-          <div className={classes.root}>
+          <div>
 
-            <List component="div" className={classes.taskList}>
+            <List component="div">
               {taskList.map(task => <Task key={task._id} {...task} {...props} />)}
             </List>
           </div>
@@ -62,4 +56,4 @@ TaskList.propTypes = {
   classes: T.objectOf(T.string).isRequired,
 };
 
-export default withStyles(styles)(TaskList);
+export default TaskList;

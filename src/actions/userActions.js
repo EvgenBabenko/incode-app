@@ -2,75 +2,90 @@ import userTypes from '../constants/userTypes';
 import services from '../services';
 import history from '../helpers/history';
 
-const userRequest = () => ({ type: userTypes.USER_REQUEST });
-const loadProfileSuccess = data => ({ type: userTypes.LOAD_PROFILE_SUCCESS, data });
-const loadProfileFailure = () => ({ type: userTypes.LOAD_PROFILE_FAILURE });
+const getUserRequest = () => ({ type: userTypes.GET_USER_REQUEST });
+const getUserSuccess = data => ({ type: userTypes.GET_USER_SUCCESS, data });
+const getUserFailure = err => ({ type: userTypes.GET_USER_FAILURE, err });
 
-export const me = () => (dispatch) => {
-  dispatch(userRequest());
+export const getUser = () => async (dispatch) => {
+  dispatch(getUserRequest());
 
-  services.userService.me()
-    .then(
-      data => dispatch(loadProfileSuccess(data)),
-      error => dispatch(loadProfileFailure()),
-    );
+  try {
+    const { data } = await services.userService.getUser();
+
+    dispatch(getUserSuccess(data));
+  } catch (err) {
+    dispatch(getUserFailure(err));
+  }
 };
 
-const updateProfileSuccess = profile => ({ type: userTypes.UPDATE_PROFILE_SUCCESS, profile });
-const updateProfileFailure = () => ({ type: userTypes.UPDATE_PROFILE_FAILURE });
+const updateProfileRequest = () => ({ type: userTypes.UPDATE_PROFILE_REQUEST });
+const updateProfileSuccess = data => ({ type: userTypes.UPDATE_PROFILE_SUCCESS, data });
+const updateProfileFailure = err => ({ type: userTypes.UPDATE_PROFILE_FAILURE, err });
 
-export const updateProfile = (id, payload) => (dispatch) => {
-  dispatch(userRequest());
+export const updateProfile = (id, payload) => async (dispatch) => {
+  dispatch(updateProfileRequest());
 
-  services.userService.updateProfile(id, payload)
-    .then(() => dispatch(me()));
-  // .then(data => dispatch(updateProfileSuccess(data)));
+  try {
+    const { data } = await services.userService.updateProfile(id, payload);
+
+    dispatch(updateProfileSuccess(data));
+  } catch (err) {
+    dispatch(updateProfileFailure(err));
+  }
 };
 
 export const openEditProfile = () => ({ type: userTypes.OPEN_EDIT_PROFILE });
 
 export const closeEditProfile = () => ({ type: userTypes.CLOSE_EDIT_PROFILE });
 
-const registerSuccess = user => ({ type: userTypes.REGISTER_SUCCESS, user });
-const registerFailure = () => ({ type: userTypes.REGISTER_FAILURE });
+const registerRequest = () => ({ type: userTypes.REGISTER_REQUEST });
+const registerSuccess = data => ({ type: userTypes.REGISTER_SUCCESS, data });
+const registerFailure = err => ({ type: userTypes.REGISTER_FAILURE, err });
 
-export const register = payload => (dispatch) => {
-  dispatch(userRequest());
+export const signUp = payload => async (dispatch) => {
+  dispatch(registerRequest());
 
-  services.userService.register(payload)
-    .then(
-      (data) => {
-        dispatch(registerSuccess(data.data));
-        history.push('/');
-      },
-      (error) => {
-        dispatch(registerFailure());
-        history.push('/');
-      },
-    );
+  try {
+    const data = await services.userService.auth('/auth/signup', payload);
+
+    dispatch(registerSuccess(data));
+
+    await dispatch(getUser());
+
+    history.push('/');
+  } catch (err) {
+    dispatch(registerFailure(err));
+
+    history.push('/signup');
+  }
 };
 
-export const logout = () => {
-  services.userService.logout();
+export const logOut = () => {
+  services.userService.logOut();
+
+  history.push('/login');
 
   return { type: userTypes.LOGOUT };
 };
 
-const loginSuccess = user => ({ type: userTypes.LOGIN_SUCCESS, user });
-const loginFailure = () => ({ type: userTypes.LOGIN_FAILURE });
+const loginRequest = () => ({ type: userTypes.LOGIN_REQUEST });
+const loginSuccess = data => ({ type: userTypes.LOGIN_SUCCESS, data });
+const loginFailure = err => ({ type: userTypes.LOGIN_FAILURE, err });
 
-export const login = payload => (dispatch) => {
-  dispatch(userRequest());
+export const logIn = payload => async (dispatch) => {
+  dispatch(loginRequest());
 
-  services.userService.login(payload)
-    .then(
-      (data) => {
-        dispatch(loginSuccess(data.data));
-        history.push('/');
-      },
-      (error) => {
-        dispatch(loginFailure());
-        history.push('/');
-      },
-    );
+  try {
+    const data = await services.userService.auth('/auth/login', payload);
+
+    dispatch(loginSuccess(data));
+
+    await dispatch(getUser());
+
+    history.push('/');
+  } catch (err) {
+    dispatch(loginFailure(err));
+
+    history.push('/login');
+  }
 };

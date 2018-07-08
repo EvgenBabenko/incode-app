@@ -43,10 +43,6 @@ const mapStateToProps = state => ({
   taskDetails: state.dashboard.taskDetails,
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
-// });
-
 TaskDetailsContainer.propTypes = {
   dispatch: T.func.isRequired,
   match: T.objectOf(T.object).isRequired,

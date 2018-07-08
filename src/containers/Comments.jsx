@@ -24,14 +24,6 @@ class Comments extends Component {
     this.getComments();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   // Typical usage (don't forget to compare props):
-  //   if (this.props.isLogin !== prevProps.isLogin) {
-  //     // this.fetchData(this.props.userID);
-  //     this.getComments();
-  //   }
-  // }
-
   getComments() {
     const { taskID, dispatch } = this.props;
 
@@ -47,8 +39,6 @@ class Comments extends Component {
     } = this.props;
 
     const { dispatch } = this.props;
-    // print the form values to the console
-    console.log('submit', values, isEditComment, commentID);
 
     if (isEditComment) {
       dispatch(commentActionCreators.updateComment(commentID, values));
@@ -73,15 +63,6 @@ const mapStateToProps = state => ({
   userID: state.user.userID,
   isEditComment: state.comments.isEditComment,
 });
-
-// const mapDispatchToProps = dispatch => ({
-//   loadComments: comments => dispatch(commentsActions.loadComments(comments)),
-//   addComment: comment => dispatch(commentsActions.addComment(comment)),
-//   updateComment: (id, comment) => dispatch(commentsActions.updateComment(id, comment)),
-//   deleteComment: id => dispatch(commentsActions.deleteComment(id)),
-//   openEditComment: () => dispatch(commentsActions.openEditComment()),
-//   closeEditComment: () => dispatch(commentsActions.closeEditComment()),
-// });
 
 Comments.propTypes = {
   dispatch: T.func.isRequired,

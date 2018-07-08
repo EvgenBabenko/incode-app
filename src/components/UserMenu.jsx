@@ -42,11 +42,11 @@ class UserMenu extends Component {
   }
 
   handleLogout() {
-    const { dispatch, logout } = this.props;
+    const { dispatch, logOut } = this.props;
 
     this.handleCloseMenu();
 
-    dispatch(logout());
+    dispatch(logOut());
   }
 
   render() {

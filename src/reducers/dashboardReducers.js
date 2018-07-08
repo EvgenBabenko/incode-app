@@ -18,15 +18,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isRequest: false,
-        taskList: action.dashboard,
+        taskList: action.data,
       };
     case dashboardTypes.DASHBOARD_FAILURE:
-      return {};
+      return {
+        ...state,
+        taskList: initialState.taskList,
+      };
     case dashboardTypes.TASK_DETAILS_SUCCESS:
       return {
         ...state,
         isRequest: false,
-        taskDetails: action.taskDetails,
+        taskDetails: action.data,
       };
     case dashboardTypes.TASK_DETAILS_FAILURE:
       return {

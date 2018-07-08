@@ -22,7 +22,7 @@ class Profile extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
-    dispatch(userActionCreators.me());
+    dispatch(userActionCreators.getUser());
   }
 
   submit(values) {
@@ -52,12 +52,6 @@ const mapStateToProps = state => ({
   isEditProfile: state.user.isEditProfile,
   initialValues: state.user.profile,
 });
-
-// const mapDispatchToProps = dispatch => ({
-//   updateProfile: profile => dispatch(userActions.updateProfile(profile)),
-//   openEditProfile: () => dispatch(userActions.openEditProfile()),
-//   closeEditProfile: () => dispatch(userActions.closeEditProfile()),
-// });
 
 Profile.propTypes = {
   dispatch: T.func.isRequired,

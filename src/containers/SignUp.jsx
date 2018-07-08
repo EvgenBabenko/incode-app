@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import T from 'prop-types';
 
-import LoginForm from '../components/Forms/LoginForm';
+import LogInForm from '../components/Forms/LogInForm';
 
 import * as userActionCreators from '../actions/userActions';
 
-class Register extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
 
@@ -16,12 +16,12 @@ class Register extends Component {
   submit(values) {
     const { dispatch } = this.props;
 
-    dispatch(userActionCreators.register(values));
+    dispatch(userActionCreators.signUp(values));
   }
 
   render() {
     return (
-      <LoginForm onSubmit={this.submit} title="Please register" primaryTitle="Register" secondaryTitle="Login" action="/login" />
+      <LogInForm onSubmit={this.submit} title="Please register" primaryTitle="SignUp" secondaryTitle="Login" action="/login" />
     );
   }
 }
@@ -30,8 +30,8 @@ const mapStateToProps = state => ({
   isLogin: state.user.isLogin,
 });
 
-Register.propTypes = {
+SignUp.propTypes = {
   dispatch: T.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(SignUp);
