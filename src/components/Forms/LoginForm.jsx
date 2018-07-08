@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 
 const LoginForm = (props) => {
   const {
-    handleSubmit, pristine, submitting, primaryTitle, secondaryTitle, action, title
+    handleSubmit, pristine, submitting, primaryTitle, secondaryTitle, action, title,
   } = props;
 
   return (

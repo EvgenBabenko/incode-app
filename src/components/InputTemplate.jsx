@@ -6,7 +6,7 @@ import { TextField } from 'redux-form-material-ui';
 
 const InputTemplate = (props) => {
   const {
-    name, label, type, area
+    name, label, type, area,
   } = props;
 
   return (
@@ -40,12 +40,12 @@ InputTemplate.propTypes = {
   name: T.string.isRequired,
   label: T.string.isRequired,
   type: T.string,
-  area: T.bool
+  area: T.bool,
 };
 
 InputTemplate.defaultProps = {
   area: false,
-  type: ''
+  type: '',
 };
 
 export default InputTemplate;

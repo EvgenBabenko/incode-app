@@ -12,7 +12,7 @@ export const me = () => (dispatch) => {
   services.userService.me()
     .then(
       data => dispatch(loadProfileSuccess(data)),
-      error => dispatch(loadProfileFailure())
+      error => dispatch(loadProfileFailure()),
     );
 };
 
@@ -20,7 +20,6 @@ const updateProfileSuccess = profile => ({ type: userTypes.UPDATE_PROFILE_SUCCES
 const updateProfileFailure = () => ({ type: userTypes.UPDATE_PROFILE_FAILURE });
 
 export const updateProfile = (id, payload) => (dispatch) => {
-  // need write request to server
   dispatch(userRequest());
 
   services.userService.updateProfile(id, payload)
@@ -32,9 +31,6 @@ export const openEditProfile = () => ({ type: userTypes.OPEN_EDIT_PROFILE });
 
 export const closeEditProfile = () => ({ type: userTypes.CLOSE_EDIT_PROFILE });
 
-// https://medium.freecodecamp.org/securing-node-js-restful-apis-with-json-web-tokens-9f811a92bb52
-// http://jasonwatmore.com/post/2017/12/07/react-redux-jwt-authentication-tutorial-example
-
 const registerSuccess = user => ({ type: userTypes.REGISTER_SUCCESS, user });
 const registerFailure = () => ({ type: userTypes.REGISTER_FAILURE });
 
@@ -45,13 +41,12 @@ export const register = payload => (dispatch) => {
     .then(
       (data) => {
         dispatch(registerSuccess(data.data));
-        console.log(data)
         history.push('/');
       },
       (error) => {
         dispatch(registerFailure());
         history.push('/');
-      }
+      },
     );
 };
 
@@ -76,6 +71,6 @@ export const login = payload => (dispatch) => {
       (error) => {
         dispatch(loginFailure());
         history.push('/');
-      }
+      },
     );
 };

@@ -13,7 +13,7 @@ import InputTemplate from '../InputTemplate';
 
 const EditProfileForm = (props) => {
   const {
-    handleSubmit, pristine, reset, submitting, closeEditProfile
+    handleSubmit, pristine, reset, submitting, closeEditProfile,
   } = props;
 
   return (

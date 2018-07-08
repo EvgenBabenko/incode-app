@@ -32,12 +32,12 @@ export default (state = initialState, action) => {
     case commentTypes.DELETE_COMMENT:
       return {
         ...state,
-        commentList: state.commentList.filter(comment => comment.id !== action.id)
+        commentList: state.commentList.filter(comment => comment.id !== action.id),
       };
     case commentTypes.OPEN_EDIT_COMMENT:
       return {
         ...state,
-        isEditComment: true
+        isEditComment: true,
       };
     case commentTypes.CLOSE_EDIT_COMMENT:
       return {
@@ -64,4 +64,3 @@ export default (state = initialState, action) => {
 
 //   return actions[actionType] && actions[actionType](state) || state;
 // };
-

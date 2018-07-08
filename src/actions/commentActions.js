@@ -31,9 +31,9 @@ export const deleteComment = id => ({
 });
 
 export const openEditComment = () => ({
-  type: commentTypes.OPEN_EDIT_COMMENT
+  type: commentTypes.OPEN_EDIT_COMMENT,
 });
 
 export const closeEditComment = () => ({
-  type: commentTypes.CLOSE_EDIT_COMMENT
+  type: commentTypes.CLOSE_EDIT_COMMENT,
 });

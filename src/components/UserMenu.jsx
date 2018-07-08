@@ -14,7 +14,7 @@ const styles = {
     textDecoration: 'none',
     '&:focus': {
       outline: 'none',
-    }
+    },
   },
 };
 

@@ -43,7 +43,7 @@ class Comments extends Component {
 
   submitCallback(values, commentID) {
     const {
-      isEditComment, userID, taskID
+      isEditComment, userID, taskID,
     } = this.props;
 
     const { dispatch } = this.props;

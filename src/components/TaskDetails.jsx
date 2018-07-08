@@ -7,8 +7,8 @@ import StatusDropdown from './Forms/StatusDropdown';
 const TaskDetails = (props) => {
   const {
     taskDetails: {
-      _id, title, description, status
-    }
+      _id, title, description, status,
+    },
   } = props;
 
   return (
@@ -26,7 +26,7 @@ const TaskDetails = (props) => {
 };
 
 TaskDetails.propTypes = {
-  taskDetails: T.objectOf(T.string).isRequired
+  taskDetails: T.objectOf(T.string).isRequired,
 };
 
 export default TaskDetails;

@@ -10,7 +10,7 @@ import Controls from './Controls';
 
 const Comment = (props) => {
   const {
-    content, _id, createdAt, deleteComment, submitCallback, openEditComment, closeEditComment
+    content, _id, createdAt, deleteComment, submitCallback, openEditComment, closeEditComment,
   } = props;
 
   function submit(values) {

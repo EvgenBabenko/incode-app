@@ -11,7 +11,7 @@ export const user = {
       phoneNumber: '(895) 984-0132',
       skills: 'some skills here',
       experience: 'none',
-    }
+    },
   },
   2: {
     email: 'Kellie.Marvin38@yahoo.com',
@@ -25,7 +25,7 @@ export const user = {
       phoneNumber: '1-615-843-3426 x600',
       skills: 'Deontare skills',
       experience: 'master everywhere',
-    }
+    },
   },
 };
 
@@ -36,7 +36,7 @@ export const task = {
     description: 'Lorem iae!',
     status: 'To do',
     createdAt: Date.now(),
-    createdForID: 1
+    createdForID: 1,
   },
   2: {
     id: 2,
@@ -44,7 +44,7 @@ export const task = {
     description: 'Lorem ipsumlor sit a!',
     status: 'Rewiew',
     createdAt: Date.now(),
-    createdForID: 1
+    createdForID: 1,
   },
   3: {
     id: 3,
@@ -52,7 +52,7 @@ export const task = {
     description: 'Lorem ipsum dolor sit amet c!',
     status: 'Done',
     createdAt: Date.now(),
-    createdForID: 1
+    createdForID: 1,
   },
   4: {
     id: 4,
@@ -60,7 +60,7 @@ export const task = {
     description: 'Lorem ipsum dolor sit amet cregre ryre !',
     status: 'To do',
     createdAt: Date.now(),
-    createdForID: 1
+    createdForID: 1,
   },
   5: {
     id: 5,
@@ -68,7 +68,7 @@ export const task = {
     description: 'Lorem ipsum dolor sit amet cregre ryre !',
     status: 'To do',
     createdAt: Date.now(),
-    createdForID: 2
+    createdForID: 2,
   },
   6: {
     id: 6,
@@ -76,7 +76,7 @@ export const task = {
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis voluptates voluptatum minima animi porro necessitatibus totam nisi maiores cupiditate dignissimos nulla iusto, quam asperiores veniam qui, ipsam aliquam numquam ex!',
     status: 'In progress',
     createdAt: Date.now(),
-    createdForID: 2
+    createdForID: 2,
   },
 };
 
@@ -87,7 +87,7 @@ export const comment = {
     createdAt: Date.now(),
     updatetAt: Date.now(),
     createdByID: 1,
-    taskID: 1
+    taskID: 1,
   },
   2: {
     id: 2,
@@ -95,7 +95,7 @@ export const comment = {
     createdAt: Date.now(),
     updatetAt: Date.now(),
     createdByID: 1,
-    taskID: 1
+    taskID: 1,
   },
   3: {
     id: 3,
@@ -103,7 +103,7 @@ export const comment = {
     createdAt: Date.now(),
     updatetAt: Date.now(),
     createdByID: 1,
-    taskID: 2
+    taskID: 2,
   },
   4: {
     id: 4,
@@ -111,7 +111,7 @@ export const comment = {
     createdAt: Date.now(),
     updatetAt: Date.now(),
     createdByID: 1,
-    taskID: 4
+    taskID: 4,
   },
   5: {
     id: 5,
@@ -119,7 +119,7 @@ export const comment = {
     createdAt: Date.now(),
     updatetAt: Date.now(),
     createdByID: 1,
-    taskID: 4
+    taskID: 4,
   },
   6: {
     id: 6,
@@ -127,7 +127,7 @@ export const comment = {
     createdAt: Date.now(),
     updatetAt: Date.now(),
     createdByID: 1,
-    taskID: 4
+    taskID: 4,
   },
   7: {
     id: 7,
@@ -135,7 +135,7 @@ export const comment = {
     createdAt: Date.now(),
     updatetAt: Date.now(),
     createdByID: 2,
-    taskID: 5
+    taskID: 5,
   },
   8: {
     id: 8,
@@ -143,7 +143,7 @@ export const comment = {
     createdAt: Date.now(),
     updatetAt: Date.now(),
     createdByID: 2,
-    taskID: 6
+    taskID: 6,
   },
   9: {
     id: 9,
@@ -151,6 +151,6 @@ export const comment = {
     createdAt: Date.now(),
     updatetAt: Date.now(),
     createdByID: 2,
-    taskID: 6
+    taskID: 6,
   },
 };

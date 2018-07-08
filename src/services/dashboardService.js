@@ -1,10 +1,10 @@
 import axios from 'axios';
 import config from '../config';
 
-axios.defaults.baseURL = config.AXIOS_URL;
+axios.defaults.baseURL = config.APIHost;
 
 // const fetchDashboard = userID => axios.get(`/byUser/${userID}`).then(({ data }) => data);
-const fetchDashboard = userID => axios.get('/').then(({ data }) => data);
+const fetchDashboard = () => axios.get('/').then(({ data }) => data);
 
 const fetchTask = id => axios.get(`/${id}`).then(({ data }) => data);
 
@@ -19,5 +19,5 @@ export default {
   fetchTask,
   addTask,
   updateTask,
-  deleteTask
+  deleteTask,
 };

@@ -6,7 +6,7 @@ import history from '../helpers/history';
 import Profile from '../containers/Profile';
 import Dashboard from '../containers/Dashboard';
 import TaskDetailsConainer from '../containers/TaskDetailsConainer';
-import NotFound from './NotFound';
+import NotFound from './404';
 import Register from '../containers/Register';
 import Login from '../containers/Login';
 import PrivateRoute from './PrivateRoute';
