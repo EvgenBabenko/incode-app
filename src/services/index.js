@@ -3,5 +3,5 @@ import dashboardService from './dashboardService';
 
 export default {
   userService,
-  dashboardService
+  dashboardService,
 };

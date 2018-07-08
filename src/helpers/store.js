@@ -10,5 +10,5 @@ const middleware = routerMiddleware(history);
 export default createStore(
   reducer,
   undefined,
-  composeWithDevTools(applyMiddleware(thunk, middleware))
+  composeWithDevTools(applyMiddleware(thunk, middleware)),
 );

@@ -1,3 +1,4 @@
 export default {
-  AXIOS_URL: 'http://localhost:3001/',
+  APIHost: 'http://localhost:8080/',
+  StorageKey: 'incode',
 };

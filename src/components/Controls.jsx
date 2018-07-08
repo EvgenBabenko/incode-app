@@ -9,13 +9,13 @@ import AddNew from './AddNew';
 
 const styles = {
   root: {
-    display: 'flex'
+    display: 'flex',
   },
 };
 
 const Conrols = (props) => {
   const {
-    title, children, _id, classes, deleteTask, isAdmin
+    title, children, _id, classes, deleteTask, isAdmin,
   } = props;
 
   function handleDeleteItem() {

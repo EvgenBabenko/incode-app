@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 
 const TaskForm = (props) => {
   const {
-    handleSubmit, pristine, submitting
+    handleSubmit, pristine, submitting,
   } = props;
 
   return (

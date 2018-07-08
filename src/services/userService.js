@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '../config';
 
-axios.defaults.baseURL = config.AXIOS_URL;
+axios.defaults.baseURL = config.APIHost;
 
 const register = payload => axios.post('/auth/register', { ...payload })
   .then((user) => {
@@ -9,13 +9,11 @@ const register = payload => axios.post('/auth/register', { ...payload })
     // login successful if there's a jwt token in the response
     if (user.data.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem('user', JSON.stringify(user.data));
+      localStorage.setItem(config.StorageKey, JSON.stringify(user.data));
     }
 
     return user;
   });
-
-// token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViM2RjNTQ5MzUwZDZlMmE3ZDg3NzE3NCIsImlhdCI6MTUzMDc3NDg1NywiZXhwIjoxNTMwODYxMjU3fQ.T2aoTSbVABFAcNo6eh4ldd53SIecsNYSAZ2ciV-rOO0
 
 const login = payload => axios.post('/auth/login', { ...payload })
   .then((user) => {
@@ -23,28 +21,27 @@ const login = payload => axios.post('/auth/login', { ...payload })
     // login successful if there's a jwt token in the response
     if (user.data.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem('user', JSON.stringify(user.data));
+      localStorage.setItem(config.StorageKey, JSON.stringify(user.data));
     }
 
     return user;
   });
 
-
 const logout = () => {
   // remove user from local storage to log user out
-  localStorage.removeItem('user');
+  localStorage.removeItem(config.StorageKey);
 };
 
 const me = () => {
-  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { token } = JSON.parse(localStorage.getItem(config.StorageKey));
 
   return axios({
     method: 'get',
     url: '/auth/me',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'x-access-token': token
-    }
+      'x-access-token': token,
+    },
   })
     .then(({ data }) => {
       console.log('me', data);

@@ -13,7 +13,7 @@ export const fetchDashboard = () => (dispatch) => {
   services.dashboardService.fetchDashboard()
     .then(
       data => dispatch(dashboardSuccess(data)),
-      error => dispatch(dashboardFailure())
+      error => dispatch(dashboardFailure()),
     );
 };
 
@@ -26,13 +26,13 @@ export const fetchTask = id => (dispatch) => {
   services.dashboardService.fetchTask(id)
     .then(
       data => dispatch(taskDetailsSuccess(data)),
-      error => dispatch(taskDetailsFailure())
+      error => dispatch(taskDetailsFailure()),
     );
 };
 
 export const addItem = payload => ({
   type: dashboardTypes.ADD_TASK,
-  payload
+  payload,
 });
 
 export const addTask = payload => (dispatch) => {
@@ -52,9 +52,9 @@ export const deleteTask = id => (dispatch) => {
 };
 
 export const openEditTask = () => ({
-  type: dashboardTypes.OPEN_EDIT_TASK
+  type: dashboardTypes.OPEN_EDIT_TASK,
 });
 
 export const closeEditTask = () => ({
-  type: dashboardTypes.CLOSE_EDIT_TASK
+  type: dashboardTypes.CLOSE_EDIT_TASK,
 });

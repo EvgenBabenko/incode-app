@@ -21,29 +21,29 @@ export default (state = initialState, action) => {
         isRequest: false,
         isLogin: true,
         userID: action.user.id,
-        isAdmin: action.user.role === 'admin'
+        isAdmin: action.user.role === 'admin',
       });
     case userTypes.REGISTER_FAILURE:
       return {
         ...state,
-        ...initialState
+        ...initialState,
       };
     case userTypes.LOGIN_SUCCESS:
       return Object.assign({}, state, {
         isRequest: false,
         isLogin: true,
         userID: action.user.id,
-        isAdmin: action.user.role === 'admin'
+        isAdmin: action.user.role === 'admin',
       });
     case userTypes.LOGIN_FAILURE:
       return {
         ...state,
-        ...initialState
+        ...initialState,
       };
     case userTypes.LOGOUT:
       return {
         ...state,
-        ...initialState
+        ...initialState,
       };
     case userTypes.LOAD_PROFILE_SUCCESS:
       return Object.assign({}, state, {
@@ -51,33 +51,33 @@ export default (state = initialState, action) => {
         isLogin: true,
         userID: action.data._id,
         profile: action.data.profile,
-        isAdmin: action.data.role === 'admin'
+        isAdmin: action.data.role === 'admin',
       });
     case userTypes.LOAD_PROFILE_FAILURE:
       return {
         ...state,
-        profile: null
+        profile: null,
       };
     case userTypes.UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
         isRequest: false,
-        profile: action.user
+        profile: action.user,
       };
     case userTypes.UPDATE_PROFILE_FAILURE:
       return {
         ...state,
-        profile: null
+        profile: null,
       };
     case userTypes.OPEN_EDIT_PROFILE:
       return {
         ...state,
-        isEditProfile: true
+        isEditProfile: true,
       };
     case userTypes.CLOSE_EDIT_PROFILE:
       return {
         ...state,
-        isEditProfile: false
+        isEditProfile: false,
       };
     default:
       return state;

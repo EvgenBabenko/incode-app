@@ -9,7 +9,7 @@ import * as userActionCreators from '../actions/userActions';
 
 class LoginButtonContainer extends Component {
   // static propTypes = {
-  //   isLogin: React.PropTypes.string.isRequired,
+  //   isLogin: T.string.isRequired,
   // };
 
   constructor(props) {

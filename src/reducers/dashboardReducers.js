@@ -31,12 +31,12 @@ export default (state = initialState, action) => {
     case dashboardTypes.TASK_DETAILS_FAILURE:
       return {
         ...state,
-        taskDetails: null
+        taskDetails: null,
       };
     case dashboardTypes.OPEN_EDIT_TASK:
       return {
         ...state,
-        isEditTask: true
+        isEditTask: true,
       };
     case dashboardTypes.CLOSE_EDIT_TASK:
       return {

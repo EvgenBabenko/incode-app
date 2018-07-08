@@ -62,7 +62,7 @@ const mapStateToProps = state => ({
 Profile.propTypes = {
   dispatch: T.func.isRequired,
   profile: T.objectOf(T.string).isRequired,
-  isEditProfile: T.bool.isRequired
+  isEditProfile: T.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(Profile);

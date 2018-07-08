@@ -23,7 +23,7 @@ const NotFound = ({ classes }) => (
 );
 
 NotFound.propTypes = {
-  classes: T.objectOf(T.object).isRequired
+  classes: T.objectOf(T.object).isRequired,
 };
 
 export default withStyles(styles)(NotFound);

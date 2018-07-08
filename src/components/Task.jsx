@@ -21,8 +21,8 @@ const styles = theme => ({
   action: {
     display: 'none',
     '&:hover': {
-      display: 'inlineFlex'
-    }
+      display: 'inlineFlex',
+    },
   },
   button: {
     margin: theme.spacing.unit,
@@ -34,7 +34,7 @@ const styles = theme => ({
 
 const Task = (props) => {
   const {
-    title, description, classes, _id, openEditTask, closeEditTask, updateTask
+    title, description, classes, _id, openEditTask, closeEditTask, updateTask,
   } = props;
 
   function submit(values) {

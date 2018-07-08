@@ -28,7 +28,7 @@ const styles = {
 
 const ProfileDetails = (props) => {
   const {
-    classes, profile, openEditProfile, closeEditProfile
+    classes, profile, openEditProfile, closeEditProfile,
   } = props;
   console.log('ProfileDetails', props);
 
