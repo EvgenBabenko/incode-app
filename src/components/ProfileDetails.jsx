@@ -30,7 +30,6 @@ const ProfileDetails = (props) => {
   const {
     classes, profile, openEditProfile, closeEditProfile,
   } = props;
-  console.log('ProfileDetails', props);
 
   return (
     <div className={classes.row}>

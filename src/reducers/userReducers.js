@@ -5,13 +5,18 @@ const initialState = {
   profile: {},
   isRequest: false,
   isEditProfile: false,
-  userID: null,
   isAdmin: false,
+  userID: null,
 };
+
+const ADMIN = 'admin';
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case userTypes.USER_REQUEST:
+    case userTypes.GET_USER_REQUEST:
+    case userTypes.UPDATE_PROFILE_REQUEST:
+    case userTypes.REGISTER_REQUEST:
+    case userTypes.LOGIN_REQUEST:
       return {
         ...state,
         isRequest: true,
@@ -20,8 +25,6 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isRequest: false,
         isLogin: true,
-        userID: action.user.id,
-        isAdmin: action.user.role === 'admin',
       });
     case userTypes.REGISTER_FAILURE:
       return {
@@ -32,8 +35,6 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isRequest: false,
         isLogin: true,
-        userID: action.user.id,
-        isAdmin: action.user.role === 'admin',
       });
     case userTypes.LOGIN_FAILURE:
       return {
@@ -45,29 +46,29 @@ export default (state = initialState, action) => {
         ...state,
         ...initialState,
       };
-    case userTypes.LOAD_PROFILE_SUCCESS:
+    case userTypes.GET_USER_SUCCESS:
       return Object.assign({}, state, {
         isRequest: false,
         isLogin: true,
-        userID: action.data._id,
         profile: action.data.profile,
-        isAdmin: action.data.role === 'admin',
+        isAdmin: action.data.role === ADMIN,
+        userID: action.data._id,
       });
-    case userTypes.LOAD_PROFILE_FAILURE:
+    case userTypes.GET_USER_FAILURE:
       return {
         ...state,
-        profile: null,
+        profile: {},
       };
     case userTypes.UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
         isRequest: false,
-        profile: action.user,
+        profile: action.data.profile,
       };
     case userTypes.UPDATE_PROFILE_FAILURE:
       return {
         ...state,
-        profile: null,
+        profile: {},
       };
     case userTypes.OPEN_EDIT_PROFILE:
       return {

@@ -30,9 +30,6 @@ const Conrols = (props) => {
             <AddNew title={title} edit {...props}>
               {children}
             </AddNew>
-            {/* <Button variant="fab" color="secondary" aria-label="edit" mini>
-        <EditIcon />
-      </Button> */}
             <Button onClick={handleDeleteItem} variant="fab" aria-label="delete" mini>
               <DeleteIcon />
             </Button>
@@ -47,7 +44,6 @@ const Conrols = (props) => {
 Conrols.propTypes = {
   title: T.string.isRequired,
   children: T.element.isRequired,
-  // deleteItem: T.func.isRequired,
   _id: T.string.isRequired,
   deleteTask: T.func.isRequired,
   classes: T.objectOf(T.string).isRequired,

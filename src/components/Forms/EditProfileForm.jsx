@@ -21,9 +21,10 @@ const EditProfileForm = (props) => {
       <InputTemplate name="avatar" label="Avatar" type="text" />
       <InputTemplate name="firstName" label="First name" type="text" />
       <InputTemplate name="lastName" label="Last name" type="text" />
-      <InputTemplate name="email" label="Email" type="text" />
       <div>
-        <label>Gender</label>
+        <label>
+          Gender
+        </label>
         <Field name="gender" aria-label="gender" label="Gender" component={RadioGroup}>
           <FormControlLabel value="male" control={<Radio color="primary" />} label="Male" />
           <FormControlLabel value="female" control={<Radio color="primary" />} label="Female" />

@@ -2,40 +2,43 @@ import dashboardTypes from '../constants/dashboardTypes';
 import services from '../services';
 
 const dashboardRequest = () => ({ type: dashboardTypes.DASHBOARD_REQUEST });
-const dashboardSuccess = dashboard => ({ type: dashboardTypes.DASHBOARD_SUCCESS, dashboard });
-const dashboardFailure = () => ({ type: dashboardTypes.DASHBOARD_FAILURE });
+const dashboardSuccess = data => ({ type: dashboardTypes.DASHBOARD_SUCCESS, data });
+const dashboardFailure = err => ({ type: dashboardTypes.DASHBOARD_FAILURE, err });
 
 // export const fetchDashboard = userID => (dispatch) => {
-export const fetchDashboard = () => (dispatch) => {
+export const fetchDashboard = () => async (dispatch) => {
   dispatch(dashboardRequest());
 
-  // services.dashboardService.fetchDashboard(userID)
-  services.dashboardService.fetchDashboard()
-    .then(
-      data => dispatch(dashboardSuccess(data)),
-      error => dispatch(dashboardFailure()),
-    );
+  try {
+    const { data } = await services.dashboardService.fetchDashboard();
+
+    dispatch(dashboardSuccess(data));
+  } catch (err) {
+    dispatch(dashboardFailure(err));
+  }
 };
 
-const taskDetailsSuccess = taskDetails => ({ type: dashboardTypes.TASK_DETAILS_SUCCESS, taskDetails });
-const taskDetailsFailure = () => ({ type: dashboardTypes.TASK_DETAILS_FAILURE });
+const taskDetailsRequest = () => ({ type: dashboardTypes.TASK_DETAILS_REQUEST });
+const taskDetailsSuccess = data => ({ type: dashboardTypes.TASK_DETAILS_SUCCESS, data });
+const taskDetailsFailure = err => ({ type: dashboardTypes.TASK_DETAILS_FAILURE, err });
 
-export const fetchTask = id => (dispatch) => {
-  dispatch(dashboardRequest());
+export const fetchTask = id => async (dispatch) => {
+  dispatch(taskDetailsRequest());
 
-  services.dashboardService.fetchTask(id)
-    .then(
-      data => dispatch(taskDetailsSuccess(data)),
-      error => dispatch(taskDetailsFailure()),
-    );
+  try {
+    const { data } = await services.dashboardService.fetchTask(id);
+
+    dispatch(taskDetailsSuccess(data));
+  } catch (err) {
+    dispatch(taskDetailsFailure(err));
+  }
 };
 
-export const addItem = payload => ({
-  type: dashboardTypes.ADD_TASK,
-  payload,
-});
+// const addTaskRequest = () => ({ type: dashboardTypes.ADD_TASK_REQUEST });
+// const addTaskSuccess = data => ({ type: dashboardTypes.ADD_TASK_SUCCESS, data });
+// const addTaskFailure = err => ({ type: dashboardTypes.ADD_TASK_FAILURE, err });
 
-export const addTask = payload => (dispatch) => {
+export const addTask = payload => async (dispatch) => {
   services.dashboardService.addTask(payload)
     .then(() => dispatch(fetchDashboard()));
 };

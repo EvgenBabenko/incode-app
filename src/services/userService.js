@@ -1,61 +1,37 @@
 import axios from 'axios';
+
 import config from '../config';
+import authHeader from '../helpers/authHeader';
 
 axios.defaults.baseURL = config.APIHost;
 
-const register = payload => axios.post('/auth/register', { ...payload })
-  .then((user) => {
-    console.log('register', user);
-    // login successful if there's a jwt token in the response
-    if (user.data.token) {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem(config.StorageKey, JSON.stringify(user.data));
-    }
+const auth = async (url, payload) => {
+  const data = await axios.post(url, { ...payload });
 
-    return user;
-  });
+  if (data.data.token) {
+    localStorage.setItem(config.StorageKey, JSON.stringify(data.data));
+  }
+};
 
-const login = payload => axios.post('/auth/login', { ...payload })
-  .then((user) => {
-    console.log('login', user);
-    // login successful if there's a jwt token in the response
-    if (user.data.token) {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem(config.StorageKey, JSON.stringify(user.data));
-    }
-
-    return user;
-  });
-
-const logout = () => {
-  // remove user from local storage to log user out
+const logOut = () => {
   localStorage.removeItem(config.StorageKey);
 };
 
-const me = () => {
-  const { token } = JSON.parse(localStorage.getItem(config.StorageKey));
+const getUser = async () => {
+  const data = await axios.create(authHeader()).get('/auth/me');
 
-  return axios({
-    method: 'get',
-    url: '/auth/me',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'x-access-token': token,
-    },
-  })
-    .then(({ data }) => {
-      console.log('me', data);
-
-      return data;
-    });
+  return data;
 };
 
-const updateProfile = (id, payload) => axios.put(`/user/${id}`, { ...payload });
+const updateProfile = async (id, payload) => {
+  const data = await axios.put(`/user/${id}`, { ...payload });
+
+  return data;
+};
 
 export default {
-  register,
-  login,
-  logout,
-  me,
+  auth,
+  logOut,
+  getUser,
   updateProfile,
 };

@@ -10,7 +10,7 @@ import * as userActions from './actions/userActions';
 const hasUserToken = JSON.parse(localStorage.getItem(config.StorageKey));
 
 if (hasUserToken) {
-  store.dispatch(userActions.me());
+  store.dispatch(userActions.getUser());
 }
 
 const App = () => (

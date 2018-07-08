@@ -3,7 +3,7 @@ import commentTypes from '../constants/commentTypes';
 const initialState = {
   commentList: [],
   isEditComment: false,
-  isFetching: false,
+  isRequest: false,
 };
 
 export default (state = initialState, action) => {

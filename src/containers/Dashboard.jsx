@@ -17,27 +17,32 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, userID } = this.props;
+    const { dispatch } = this.props;
 
     // dispatch(dashboardActionCreators.fetchDashboard(userID));
     dispatch(dashboardActionCreators.fetchDashboard());
   }
 
-  // componentDidUpdate(prevProps) {
-  //   const { isLogin, userID } = this.props;
-  //   // Typical usage (don't forget to compare props):
-  //   if (isLogin !== prevProps.isLogin) {
-  //     // this.fetchData(userID);
-  //     this.getDashboard(userID);
-  //   }
-  // }
-
   render() {
+    const { isLogin } = this.props;
+
     return (
-      <TaskList
-        {...this.props}
-        {...this.boundActionCreators}
-      />
+      <React.Fragment>
+        {
+          isLogin
+            ? (
+              <TaskList
+                {...this.props}
+                {...this.boundActionCreators}
+              />
+            )
+            : (
+              <p>
+                Loading ...
+              </p>
+            )
+        }
+      </React.Fragment>
     );
   }
 }
@@ -49,17 +54,6 @@ const mapStateToProps = state => ({
   taskList: state.dashboard.taskList,
   isEditTask: state.dashboard.isEditTask,
 });
-
-// const mapDispatchToProps = dispatch => ({
-//   loadDashboard: dashboard => dispatch(dashboardActions.loadDashboard(dashboard)),
-//   addTask: task => dispatch(dashboardActions.addTask(task)),
-//   updateTask: (id, task) => dispatch(dashboardActions.updateTask(id, task)),
-//   deleteTask: id => dispatch(dashboardActions.deleteTask(id)),
-//   changeTaskStatus: (id, status) => dispatch(dashboardActions.changeTaskStatus(id, status)),
-//   openEditTask: () => dispatch(dashboardActions.openEditTask()),
-//   closeEditTask: () => dispatch(dashboardActions.closeEditTask()),
-//   fetchTasks: () => dispatch(dashboardActions.fetchTasks()),
-// });
 
 Dashboard.propTypes = {
   dispatch: T.func.isRequired,
